@@ -1,0 +1,7 @@
+*.local
+*.identcache
+*.tvsconfig
+*.dcu
+/__history
+__history
+/Win32/Debug
