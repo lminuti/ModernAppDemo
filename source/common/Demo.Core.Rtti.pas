@@ -25,6 +25,7 @@ type
   TRttiUtils = class
   private
     class var FContext: TRttiContext;
+    class procedure InitializeRtti; static;
   public
     class function FindAttribute<T: TCustomAttribute>(AType: TRttiObject): T;  overload; static;
     class function FindAttribute<T: TCustomAttribute>(AType: TClass): T; overload; static;
@@ -72,5 +73,14 @@ class function TRttiUtils.FindAttribute<T>(AType: TClass): T;
 begin
   Result := FindAttribute<T>(FContext.GetType(AType));
 end;
+
+class procedure TRttiUtils.InitializeRtti;
+begin
+  FContext := TRttiContext.Create;
+end;
+
+initialization
+
+TRttiUtils.InitializeRtti;
 
 end.

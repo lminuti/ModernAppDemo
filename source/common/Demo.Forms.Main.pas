@@ -61,6 +61,7 @@ end;
 
 procedure TFormMain.FormShow(Sender: TObject);
 begin
+  Caption := ExtractFileName(Application.ExeName);
   BuildMenu;
 end;
 

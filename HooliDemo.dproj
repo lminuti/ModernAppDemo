@@ -3,7 +3,7 @@
         <ProjectGuid>{8D8C6C03-B677-4BF4-B769-F985B47FCEB1}</ProjectGuid>
         <ProjectVersion>18.4</ProjectVersion>
         <FrameworkType>VCL</FrameworkType>
-        <MainSource>ModernAppDemo.dpr</MainSource>
+        <MainSource>HooliDemo.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
@@ -53,7 +53,7 @@
         <Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
         <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
         <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
-        <SanitizedProjectName>ModernAppDemo</SanitizedProjectName>
+        <SanitizedProjectName>HooliDemo</SanitizedProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <DCC_UsePackage>DBXSqliteDriver;fmxase;DBXDb2Driver;DBXInterBaseDriver;vclactnband;vclFireDAC;tethering;svnui;JvGlobus;FireDACADSDriver;EasyLib.Core;JvPluginSystem;DBXMSSQLDriver;JvMM;DatasnapConnectorsFreePascal;FireDACMSSQLDriver;vcltouch;JvBands;vcldb;bindcompfmx;svn;JvJans;DBXOracleDriver;unidac250;JvNet;inetdb;JvAppFrm;rbTC1925;FmxTeeUI;emsedge;rbIDE1925;fmx;fmxdae;JvDotNetCtrls;EasyReST.Core;vclib;JvWizards;FireDACDBXDriver;dbexpress;IndyCore;vclx;JvPageComps;dsnap;DataSnapCommon;JvDB;DataSnapConnectors;VCLRESTComponents;rbTCUI1925;JclDeveloperTools;vclie;bindengine;DBXMySQLDriver;FireDACOracleDriver;FireDACMySQLDriver;DBXFirebirdDriver;ibdacfmx250;vquery250;JvCmp;JvHMI;FireDACCommonODBC;rbRCL1925;DataSnapClient;IndyIPCommon;bindcompdbx;JvCustom;vcl;IndyIPServer;DBXSybaseASEDriver;JvXPCtrls;dac250;IndySystem;FireDACDb2Driver;dsnapcon;FireDACMSAccDriver;fmxFireDAC;FireDACInfxDriver;vclimg;ibdac250;TeeDB;ibdacvcl250;Jcl;JvCore;emshosting;JvCrypt;FireDACPgDriver;ibmonitor;FireDACASADriver;DBXOdbcDriver;FireDACTDataDriver;FMXTee;DbxCommonDriver;rbUSER1925;JvDlgs;ibxpress;Tee;JvManagedThreads;DataSnapServer;xmlrtl;DataSnapNativeClient;fmxobj;vclwinx;FireDACDSDriver;rtl;ibxbindings;DbxClientDriver;dacvcl250;DBXSybaseASADriver;unidacfmx250;CustomIPTransport;vcldsnap;rbUSERDesign1925;JvSystem;JvStdCtrls;JvRuntimeDesign;JvTimeFramework;XMLPartner_PR250;bindcomp;appanalytics;DBXInformixDriver;crcontrols250;IndyIPClient;rbBDE1925;bindcompvcl;anagindpkg;TeeUI;JvDocking;dbxcds;VclSmp;unidacvcl250;adortl;FireDACODBCDriver;VCLXDBGrid250;JvPascalInterpreter;JclVcl;DataSnapIndy10ServerTransport;dacfmx250;dsnapxml;DataSnapProviderClient;dbrtl;IndyProtocols;inetdbxpress;FireDACMongoDBDriver;JvControls;JvPrintPreview;JclContainers;DataSnapServerMidas;$(DCC_UsePackage)</DCC_UsePackage>
@@ -91,35 +91,30 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="source\Demo.Core.Registry.pas"/>
-        <DCCReference Include="source\Demo.Forms.GenericDialog.pas">
+        <DCCReference Include="source\common\Demo.Core.Registry.pas"/>
+        <DCCReference Include="source\common\Demo.Forms.GenericDialog.pas">
             <Form>FormGenericDialog</Form>
         </DCCReference>
-        <DCCReference Include="source\Demo.Forms.Main.pas">
+        <DCCReference Include="source\common\Demo.Forms.Main.pas">
             <Form>FormMain</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="source\Demo.Forms.Test.pas">
+        <DCCReference Include="source\common\Demo.Forms.Test.pas">
             <Form>FrameTest</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="source\Demo.Modules.DBBuilder.pas">
+        <DCCReference Include="source\common\Demo.Modules.DBBuilder.pas">
             <Form>DatabaseBuilder</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="source\Demo.Forms.EmployeeList.pas">
+        <DCCReference Include="source\hooli\Demo.Forms.EmployeeList.pas">
             <Form>FrameEmployeeList</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="source\Demo.Interfaces.pas"/>
-        <DCCReference Include="source\Demo.Formula.Test.pas"/>
-        <DCCReference Include="source\Demo.Core.Rtti.pas"/>
-        <DCCReference Include="source\Demo.Modules.Main.pas">
+        <DCCReference Include="source\common\Demo.Interfaces.pas"/>
+        <DCCReference Include="source\hooli\Demo.Formula.Test.pas"/>
+        <DCCReference Include="source\common\Demo.Core.Rtti.pas"/>
+        <DCCReference Include="source\common\Demo.Modules.Main.pas">
             <Form>DataModuleMain</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <BuildConfiguration Include="Release">
@@ -140,13 +135,13 @@
         <BorlandProject>
             <Delphi.Personality>
                 <Source>
-                    <Source Name="MainSource">ModernAppDemo.dpr</Source>
+                    <Source Name="MainSource">HooliDemo.dpr</Source>
                 </Source>
             </Delphi.Personality>
             <Deployment Version="3">
-                <DeployFile LocalName="Win32\Debug\ModernAppDemo.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="Win32\Debug\HooliDemo.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
-                        <RemoteName>ModernAppDemo.exe</RemoteName>
+                        <RemoteName>HooliDemo.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

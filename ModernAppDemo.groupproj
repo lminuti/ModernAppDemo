@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{CA7CEAD8-F596-4445-8365-F9E5A5DED9C5}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="HooliDemo.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="PiedPiperDemo.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="HooliDemo">
+        <MSBuild Projects="HooliDemo.dproj"/>
+    </Target>
+    <Target Name="HooliDemo:Clean">
+        <MSBuild Projects="HooliDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="HooliDemo:Make">
+        <MSBuild Projects="HooliDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="PiedPiperDemo">
+        <MSBuild Projects="PiedPiperDemo.dproj"/>
+    </Target>
+    <Target Name="PiedPiperDemo:Clean">
+        <MSBuild Projects="PiedPiperDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="PiedPiperDemo:Make">
+        <MSBuild Projects="PiedPiperDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="HooliDemo;PiedPiperDemo"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="HooliDemo:Clean;PiedPiperDemo:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="HooliDemo:Make;PiedPiperDemo:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
