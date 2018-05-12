@@ -10,6 +10,7 @@ type
   ['{D25B0435-5778-4803-AE95-4A1492643BF5}']
     procedure SetParent(AParent: TWinControl);
     function GetClientRect: TRect;
+    procedure SetParams(Value: TValue);
   end;
 
   ILookupFrame = interface(IFrame)

@@ -17,7 +17,11 @@ type
   private
     FDataModuleMain: TDataModuleMain;
   public
+    { ILookupFrame }
     function GetResultValue: TValue;
+    { IFrame }
+    procedure SetParams(Value: TValue);
+
     constructor Create(AOwner: TComponent); override;
   end;
 
@@ -42,6 +46,17 @@ begin
   Result := -1;
   if not FDataModuleMain.FDQueryEmployee.IsEmpty then
     Result := FDataModuleMain.FDQueryEmployee.FieldByName('EMP_NO').AsInteger;
+end;
+
+procedure TFrameEmployeeList.SetParams(Value: TValue);
+var
+  EmpNo: Integer;
+begin
+  if Value.IsOrdinal then
+  begin
+    EmpNo := Value.AsInteger;
+    FDataModuleMain.FDQueryEmployee.Locate('EMP_NO', EmpNo, []);
+  end;
 end;
 
 initialization

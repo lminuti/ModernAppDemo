@@ -39,7 +39,8 @@ uses
 
 procedure TFrameTest.ButtonSeachEmpNoClick(Sender: TObject);
 begin
-  TFormGenericDialog.ShowDialog<ILookupFrame>('employee-list',
+  TFormGenericDialog.ShowDialogWithParam<ILookupFrame>('employee-list',
+    StrToIntDef(EditEmpNo.Text, -1),
     procedure (ModalResult: TModalResult; AFrame: ILookupFrame)
     begin
       if ModalResult = mrOk then
