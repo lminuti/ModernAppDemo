@@ -23,6 +23,7 @@ type
   public
     class procedure Initialize;
     constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
   end;
 
 var
@@ -46,6 +47,12 @@ begin
   FDConnection.Params.Add('Database=' + DatabaseName);
   FDConnection.Params.Add('SQLiteAdvanced=page_size=4096');
   FDConnection.Connected := True;
+end;
+
+destructor TDatabaseBuilder.Destroy;
+begin
+  FDConnection.Connected := False;
+  inherited;
 end;
 
 procedure TDatabaseBuilder.DoInitialize;

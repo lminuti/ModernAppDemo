@@ -10,7 +10,8 @@ uses
   Demo.Forms.EmployeeList in 'source\Demo.Forms.EmployeeList.pas' {FrameEmployeeList: TFrame},
   Demo.Interfaces in 'source\Demo.Interfaces.pas',
   Demo.Formula.Test in 'source\Demo.Formula.Test.pas',
-  Demo.Core.Rtti in 'source\Demo.Core.Rtti.pas';
+  Demo.Core.Rtti in 'source\Demo.Core.Rtti.pas',
+  Demo.Modules.Main in 'source\Demo.Modules.Main.pas' {DataModuleMain: TDataModule};
 
 {$R *.res}
 

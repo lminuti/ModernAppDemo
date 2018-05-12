@@ -1,7 +1,7 @@
 object FormMain: TFormMain
   Left = 0
   Top = 0
-  Caption = 'FormMain'
+  Caption = 'ModernAppDemo'
   ClientHeight = 377
   ClientWidth = 702
   Color = clBtnFace
