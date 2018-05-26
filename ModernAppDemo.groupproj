@@ -9,6 +9,9 @@
         <Projects Include="PiedPiperDemo.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="Anonymizer.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -35,14 +38,23 @@
     <Target Name="PiedPiperDemo:Make">
         <MSBuild Projects="PiedPiperDemo.dproj" Targets="Make"/>
     </Target>
+    <Target Name="Anonymizer">
+        <MSBuild Projects="Anonymizer.dproj"/>
+    </Target>
+    <Target Name="Anonymizer:Clean">
+        <MSBuild Projects="Anonymizer.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Anonymizer:Make">
+        <MSBuild Projects="Anonymizer.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="HooliDemo;PiedPiperDemo"/>
+        <CallTarget Targets="HooliDemo;PiedPiperDemo;Anonymizer"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="HooliDemo:Clean;PiedPiperDemo:Clean"/>
+        <CallTarget Targets="HooliDemo:Clean;PiedPiperDemo:Clean;Anonymizer:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="HooliDemo:Make;PiedPiperDemo:Make"/>
+        <CallTarget Targets="HooliDemo:Make;PiedPiperDemo:Make;Anonymizer:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

@@ -6,6 +6,8 @@ uses
   System.Classes, System.SysUtils;
 
 type
+  ERegistryError = class(Exception);
+
   TClassInfo = record
     ClassType: TClass;
     AliasName: string;
@@ -14,40 +16,53 @@ type
   TClassInfoList = array of TClassInfo;
 
   TClassRegistry = class(TObject)
-  // class variables and methods
-  private
-    class var FInstance: TClassRegistry;
-    class function GetInstance: TClassRegistry; static; inline;
-  public
-    class property Instance: TClassRegistry read GetInstance;
-    class destructor Destroy;
-  // instace variables and methods
   private
     FRegistry: TClassInfoList;
-    function GetRegistry: TClassInfoList;
+//    function GetRegistry: TClassInfoList;
     function GetAlias(AClassType: TClass): string;
   public
     function GetClass<T>: T; overload;
     function GetClass<T>(const AClassOrAlias: string): T; overload;
-    property Registry: TClassInfoList read GetRegistry;
     procedure RegisterClass(AClassType: TClass);
+    procedure ForEach<T>(AProc: TProc<TClass>);
   end;
+
+function ClassRegistry: TClassRegistry;
 
 implementation
 
 uses
   System.TypInfo, Demo.Core.Rtti;
 
-{ TClassRegistry }
+var
+  GlobalClassRegistry: TClassRegistry;
 
-class destructor TClassRegistry.Destroy;
+function ClassRegistry: TClassRegistry;
 begin
-  FInstance.Free;
+  if not Assigned(GlobalClassRegistry) then
+    GlobalClassRegistry := TClassRegistry.Create;
+  Result := GlobalClassRegistry;
 end;
+
+{ TClassRegistry }
 
 function TClassRegistry.GetClass<T>: T;
 begin
   Result := GetClass<T>('');
+end;
+
+procedure TClassRegistry.ForEach<T>(AProc: TProc<TClass>);
+var
+  ClassInfo: TClassInfo;
+  Frame: TObject;
+begin
+  for ClassInfo in FRegistry do
+  begin
+    if Supports(ClassInfo.ClassType, GetTypeData(TypeInfo(T))^.Guid) then
+    begin
+      AProc(ClassInfo.ClassType);
+    end;
+  end;
 end;
 
 function TClassRegistry.GetAlias(AClassType: TClass): string;
@@ -74,26 +89,20 @@ begin
         if ClassInfo.ClassType.InheritsFrom(TComponent) then
           Frame := TComponentClass(ClassInfo.ClassType).Create(nil)
         else
-          Frame := ClassInfo.ClassType.Create;
+          //Frame := ClassInfo.ClassType.Create;
+          Frame := TRttiUtils.CreateInstance(ClassInfo.ClassType);
         Frame.GetInterface(GetTypeData(TypeInfo(T))^.Guid, Result);
         Exit;
       end;
     end;
   end;
-  raise Exception.Create('Frame non trovato');
+  raise ERegistryError.CreateFmt('Classe [%s] non trovata (Alias: [%s])', [TRttiUtils.Context.GetType(TypeInfo(T)).Name, AClassOrAlias]);
 end;
 
-class function TClassRegistry.GetInstance: TClassRegistry;
-begin
-  if not Assigned(FInstance) then
-    FInstance := TClassRegistry.Create;
-  Result := FInstance;
-end;
-
-function TClassRegistry.GetRegistry: TClassInfoList;
-begin
-  Result := FRegistry;
-end;
+//function TClassRegistry.GetRegistry: TClassInfoList;
+//begin
+//  Result := FRegistry;
+//end;
 
 procedure TClassRegistry.RegisterClass(AClassType: TClass);
 var
@@ -103,5 +112,11 @@ begin
   ClassInfo.AliasName := GetAlias(AClassType);
   FRegistry := FRegistry + [ClassInfo];
 end;
+
+initialization
+  GlobalClassRegistry := nil;
+
+finalization
+  GlobalClassRegistry.Free;
 
 end.

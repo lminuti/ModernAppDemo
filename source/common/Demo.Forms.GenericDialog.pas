@@ -74,7 +74,7 @@ var
   ModalResult: TModalResult;
   Rect: TRect;
 begin
-  Frame := TClassRegistry.Instance.GetClass<T>(AClassOrAlias);
+  Frame := ClassRegistry.GetClass<T>(AClassOrAlias);
   Dialog := TFormGenericDialog.Create(nil);
   try
     Rect := Frame.GetClientRect;

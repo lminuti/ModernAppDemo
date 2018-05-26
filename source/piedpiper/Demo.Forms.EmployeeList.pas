@@ -67,6 +67,6 @@ begin
 end;
 
 initialization
-  TClassRegistry.Instance.RegisterClass(TFrameEmployeeList);
+  ClassRegistry.RegisterClass(TFrameEmployeeList);
 
 end.

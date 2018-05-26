@@ -37,7 +37,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Demo.Core.Registry, Demo.Modules.DBBuilder, Demo.Core.Rtti;
+  Demo.Core.Registry, Demo.Modules.DBBuilder, Demo.Core.Rtti, Demo.Interfaces;
 
 procedure TFormMain.CreateMenuButton(const AFrameTitle: string;
   AFrameClass: TCustomFrameClass);
@@ -67,18 +67,16 @@ end;
 
 procedure TFormMain.BuildMenu;
 var
-  FormInfo: TClassInfo;
   FrameTitle: FrameTitleAttribute;
 begin
-  for FormInfo in TClassRegistry.Instance.Registry do
-  begin
-    if FormInfo.ClassType.InheritsFrom(TCustomFrame) then
+  ClassRegistry.ForEach<IFrame>(
+    procedure (ClassType: TClass)
     begin
-      FrameTitle := TRttiUtils.FindAttribute<FrameTitleAttribute>(FormInfo.ClassType);
+      FrameTitle := TRttiUtils.FindAttribute<FrameTitleAttribute>(ClassType);
       if Assigned(FrameTitle) then
-        CreateMenuButton(FrameTitle.Title, TCustomFrameClass(FormInfo.ClassType));
-    end;
-  end;
+        CreateMenuButton(FrameTitle.Title, TCustomFrameClass(ClassType));
+    end
+  );
 end;
 
 { TMenuButton }

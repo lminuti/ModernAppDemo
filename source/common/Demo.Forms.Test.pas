@@ -5,11 +5,11 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Demo.Core.Rtti,
-  Vcl.ExtCtrls;
+  Vcl.ExtCtrls, Demo.Interfaces, System.Rtti;
 
 type
   [FrameTitle('Test')]
-  TFrameTest = class(TFrame)
+  TFrameTest = class(TFrame, IFrame)
     ButtonSeachEmpNo: TButton;
     Button2: TButton;
     Button3: TButton;
@@ -27,7 +27,8 @@ type
   private
     { Private declarations }
   public
-    { Public declarations }
+    { IFrame }
+    procedure SetParams(Value: TValue);
   end;
 
 implementation
@@ -35,7 +36,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Demo.Core.Registry, Demo.Interfaces, Demo.Forms.GenericDialog;
+  Demo.Core.Registry, Demo.Forms.GenericDialog;
 
 procedure TFrameTest.ButtonSeachEmpNoClick(Sender: TObject);
 begin
@@ -49,11 +50,15 @@ begin
   );
 end;
 
+procedure TFrameTest.SetParams(Value: TValue);
+begin
+end;
+
 procedure TFrameTest.Button1Click(Sender: TObject);
 var
   Calculator: ICalculator;
 begin
-  Calculator := TClassRegistry.Instance.GetClass<ICalculator>;
+  Calculator := ClassRegistry.GetClass<ICalculator>;
   Edit3.Text := Calculator.Calculate(StrToInt(Edit1.Text), StrToInt(Edit2.Text)).ToString;
 end;
 
@@ -68,6 +73,6 @@ begin
 end;
 
 initialization
-  TClassRegistry.Instance.RegisterClass(TFrameTest);
+  ClassRegistry.RegisterClass(TFrameTest);
 
 end.

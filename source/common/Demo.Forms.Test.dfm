@@ -54,8 +54,6 @@ object FrameTest: TFrameTest
     Caption = 'Panel2'
     ShowCaption = False
     TabOrder = 4
-    ExplicitLeft = -505
-    ExplicitWidth = 825
     object Button1: TButton
       AlignWithMargins = True
       Left = 114

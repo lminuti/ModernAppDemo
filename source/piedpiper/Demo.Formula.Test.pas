@@ -25,6 +25,6 @@ end;
 
 initialization
 
-  TClassRegistry.Instance.RegisterClass(TPiedPiperCalculator);
+  ClassRegistry.RegisterClass(TPiedPiperCalculator);
 
 end.

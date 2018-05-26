@@ -25,6 +25,6 @@ end;
 
 initialization
 
-  TClassRegistry.Instance.RegisterClass(THooliCalculator);
+  ClassRegistry.RegisterClass(THooliCalculator);
 
 end.
