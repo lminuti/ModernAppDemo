@@ -18,18 +18,19 @@ uses
   Anon.Generators.LastName in 'source\anon\Anon.Generators.LastName.pas',
   Anon.Generators.Date in 'source\anon\Anon.Generators.Date.pas',
   Anon.Generators.RandomString in 'source\anon\Anon.Generators.RandomString.pas',
-  Anon.Generators.CompanyName in 'source\anon\Anon.Generators.CompanyName.pas';
+  Anon.Generators.CompanyName in 'source\anon\Anon.Generators.CompanyName.pas',
+  Anon.Core.Utils in 'source\anon\Anon.Core.Utils.pas';
 
 begin
+  ReportMemoryLeaksOnShutdown := True;
   try
     TConsole.Run;
   except
     on E: Exception do
     begin
-      SetConsoleTextAttribute(GetStdHandle(
-                          STD_OUTPUT_HANDLE),
-                          FOREGROUND_RED or
-                          FOREGROUND_INTENSITY);
+      SetConsoleTextAttribute(
+        GetStdHandle(STD_OUTPUT_HANDLE),
+        FOREGROUND_RED or FOREGROUND_INTENSITY);
       WriteLn(ErrOutput, E.ClassName, ': ', E.Message);
     end;
   end;

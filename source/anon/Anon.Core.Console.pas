@@ -3,12 +3,12 @@ unit Anon.Core.Console;
 interface
 
 uses
-  System.SysUtils;
+  System.SysUtils, WinApi.Windows, Anon.Interfaces;
 
 type
   EConsoleError = class(Exception);
 
-  TConsole = class(TObject)
+  TConsole = class(TInterfacedObject, ILogger)
   public
     class procedure Run;
   public
@@ -16,11 +16,16 @@ type
     procedure ShowHelp;
     procedure Default;
     procedure Anonymize(const FileName, Password: string);
+    procedure Log(LogLevel: TLogLevel; const AMessage: string);
+
+    constructor Create;
+    destructor Destroy; override;
   end;
 
 implementation
 
-uses Anon.Interfaces, Demo.Core.Registry;
+uses
+  Demo.Core.Registry;
 
 const
   ExeName = 'ANONYMIZER';
@@ -41,9 +46,41 @@ begin
   Anonimizer.Anonimize(FileName);
 end;
 
+constructor TConsole.Create;
+begin
+  inherited Create;
+  // Sarebbe meglio deregistrarla sul destroy...
+  ClassRegistry.RegisterClass(TConsole,
+    function :TObject
+    begin
+      Result := Self;
+    end
+  );
+end;
+
+destructor TConsole.Destroy;
+begin
+  inherited;
+end;
+
 procedure TConsole.Default;
 begin
   ShowHelp;
+end;
+
+procedure TConsole.Log(LogLevel: TLogLevel; const AMessage: string);
+const
+  Colors: array [TLogLevel] of Word = (
+    FOREGROUND_INTENSITY or FOREGROUND_RED,    // Error
+    FOREGROUND_INTENSITY or FOREGROUND_RED or FOREGROUND_GREEN,        // Warning
+    FOREGROUND_INTENSITY or FOREGROUND_GREEN,  // Info
+    FOREGROUND_RED or FOREGROUND_GREEN or FOREGROUND_BLUE  // Debug
+  );
+begin
+  SetConsoleTextAttribute(
+    GetStdHandle(STD_OUTPUT_HANDLE),
+      Colors[LogLevel] or 0);
+  Writeln(AMessage);
 end;
 
 class procedure TConsole.Run;
@@ -54,6 +91,9 @@ var
 begin
   Console := TConsole.Create;
   try
+    // Questo serve perché uso interfacce e classi (shame on me!)
+    Console._AddRef;
+
     FindCmdLineSwitch('p', Password);
 
     if FindCmdLineSwitch('v') then
@@ -65,7 +105,7 @@ begin
     else
       Console.Default;
   finally
-    Console.Free;
+    Console._Release;
   end;
 end;
 

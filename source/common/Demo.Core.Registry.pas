@@ -24,6 +24,8 @@ type
   public
     function GetClass<T>: T; overload;
     function GetClass<T>(const AClassOrAlias: string): T; overload;
+    function TryGetClass<T>(out AValue: T): Boolean; overload;
+    function TryGetClass<T>(const AClassOrAlias: string; out AValue: T): Boolean; overload;
     procedure RegisterClass(AClassType: TClass; ACtorProc: TFunc<TObject> = nil);
     procedure ForEach<T>(AProc: TProc<TClass>);
   end;
@@ -77,29 +79,9 @@ begin
 end;
 
 function TClassRegistry.GetClass<T>(const AClassOrAlias: string): T;
-var
-  ClassInfo: TClassInfo;
-  NewObject: TObject;
 begin
-  for ClassInfo in FRegistry do
-  begin
-    if (AClassOrAlias = '') or (ClassInfo.ClassType.ClassName = AClassOrAlias) or (ClassInfo.AliasName = AClassOrAlias) then
-    begin
-      if Supports(ClassInfo.ClassType, GetTypeData(TypeInfo(T))^.Guid) then
-      begin
-        if Assigned(ClassInfo.CtorProc) then
-          NewObject := ClassInfo.CtorProc as TObject
-        else if ClassInfo.ClassType.InheritsFrom(TComponent) then
-          NewObject := TComponentClass(ClassInfo.ClassType).Create(nil)
-        else
-          //NewObject := ClassInfo.ClassType.Create;
-          NewObject := TRttiUtils.CreateInstance(ClassInfo.ClassType);
-        NewObject.GetInterface(GetTypeData(TypeInfo(T))^.Guid, Result);
-        Exit;
-      end;
-    end;
-  end;
-  raise ERegistryError.CreateFmt('Classe [%s] non trovata (Alias: [%s])', [TRttiUtils.Context.GetType(TypeInfo(T)).Name, AClassOrAlias]);
+  if not TryGetClass<T>(AClassOrAlias, Result) then
+    raise ERegistryError.CreateFmt('Classe [%s] non trovata (Alias: [%s])', [TRttiUtils.Context.GetType(TypeInfo(T)).Name, AClassOrAlias]);
 end;
 
 //function TClassRegistry.GetRegistry: TClassInfoList;
@@ -115,6 +97,38 @@ begin
   ClassInfo.AliasName := GetAlias(AClassType);
   ClassInfo.CtorProc := ACtorProc;
   FRegistry := FRegistry + [ClassInfo];
+end;
+
+function TClassRegistry.TryGetClass<T>(const AClassOrAlias: string;
+  out AValue: T): Boolean;
+var
+  ClassInfo: TClassInfo;
+  NewObject: TObject;
+begin
+  Result := False;
+  for ClassInfo in FRegistry do
+  begin
+    if (AClassOrAlias = '') or (ClassInfo.ClassType.ClassName = AClassOrAlias) or (ClassInfo.AliasName = AClassOrAlias) then
+    begin
+      if Supports(ClassInfo.ClassType, GetTypeData(TypeInfo(T))^.Guid) then
+      begin
+        if Assigned(ClassInfo.CtorProc) then
+          NewObject := ClassInfo.CtorProc()
+        else if ClassInfo.ClassType.InheritsFrom(TComponent) then
+          NewObject := TComponentClass(ClassInfo.ClassType).Create(nil)
+        else
+          //NewObject := ClassInfo.ClassType.Create;
+          NewObject := TRttiUtils.CreateInstance(ClassInfo.ClassType);
+        NewObject.GetInterface(GetTypeData(TypeInfo(T))^.Guid, AValue);
+        Exit(True);
+      end;
+    end;
+  end;
+end;
+
+function TClassRegistry.TryGetClass<T>(out AValue: T): Boolean;
+begin
+  Result := TryGetClass<T>('', AValue);
 end;
 
 initialization

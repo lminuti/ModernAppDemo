@@ -33,6 +33,13 @@ type
     function GenerateValue: Variant;
   end;
 
+  TLogLevel = (lError, lWarning, lInfo, lDebug);
+
+  ILogger = interface
+  ['{118A7D52-FFC4-4F11-8215-458A0F4C8CE3}']
+    procedure Log(LogLevel: TLogLevel; const AMessage: string);
+  end;
+
 implementation
 
 end.

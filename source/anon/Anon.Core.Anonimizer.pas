@@ -24,7 +24,7 @@ type
 implementation
 
 uses
-  Demo.Core.Registry, Demo.Core.Rtti, Anon.Generators;
+  Demo.Core.Registry, Demo.Core.Rtti, Anon.Generators, Anon.Core.Utils;
 
 { TAnonimizer }
 
@@ -66,7 +66,10 @@ procedure TAnonimizer.AnonimizeTable(Connection: IConnection;
   const TableName: string; JsonTable: TJSONValue);
 var
   GeneratorList: TGeneratorList;
+  NumOfRows: Integer;
 begin
+  TLogger.Log(lInfo, TableName);
+  NumOfRows := 0;
   GeneratorList := TGeneratorList.CreateFromConfig(JsonTable as TJSONObject);
   try
     Connection.FetchTable(TableName,
@@ -86,10 +89,12 @@ begin
           end;
         end;
         DataSet.Post;
+        Inc(NumOfRows);
       end);
   finally
     GeneratorList.Free;
   end;
+  TLogger.Log(lDebug, Format('%d rows updated', [NumOfRows]));
 end;
 
 function TAnonimizer.GetPassword: string;
