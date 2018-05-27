@@ -11,6 +11,7 @@ type
   TClassInfo = record
     ClassType: TClass;
     AliasName: string;
+    CtorProc: TFunc<TObject>;
   end;
 
   TClassInfoList = array of TClassInfo;
@@ -23,7 +24,7 @@ type
   public
     function GetClass<T>: T; overload;
     function GetClass<T>(const AClassOrAlias: string): T; overload;
-    procedure RegisterClass(AClassType: TClass);
+    procedure RegisterClass(AClassType: TClass; ACtorProc: TFunc<TObject> = nil);
     procedure ForEach<T>(AProc: TProc<TClass>);
   end;
 
@@ -78,7 +79,7 @@ end;
 function TClassRegistry.GetClass<T>(const AClassOrAlias: string): T;
 var
   ClassInfo: TClassInfo;
-  Frame: TObject;
+  NewObject: TObject;
 begin
   for ClassInfo in FRegistry do
   begin
@@ -86,12 +87,14 @@ begin
     begin
       if Supports(ClassInfo.ClassType, GetTypeData(TypeInfo(T))^.Guid) then
       begin
-        if ClassInfo.ClassType.InheritsFrom(TComponent) then
-          Frame := TComponentClass(ClassInfo.ClassType).Create(nil)
+        if Assigned(ClassInfo.CtorProc) then
+          NewObject := ClassInfo.CtorProc as TObject
+        else if ClassInfo.ClassType.InheritsFrom(TComponent) then
+          NewObject := TComponentClass(ClassInfo.ClassType).Create(nil)
         else
-          //Frame := ClassInfo.ClassType.Create;
-          Frame := TRttiUtils.CreateInstance(ClassInfo.ClassType);
-        Frame.GetInterface(GetTypeData(TypeInfo(T))^.Guid, Result);
+          //NewObject := ClassInfo.ClassType.Create;
+          NewObject := TRttiUtils.CreateInstance(ClassInfo.ClassType);
+        NewObject.GetInterface(GetTypeData(TypeInfo(T))^.Guid, Result);
         Exit;
       end;
     end;
@@ -104,12 +107,13 @@ end;
 //  Result := FRegistry;
 //end;
 
-procedure TClassRegistry.RegisterClass(AClassType: TClass);
+procedure TClassRegistry.RegisterClass(AClassType: TClass; ACtorProc: TFunc<TObject>);
 var
   ClassInfo: TClassInfo;
 begin
   ClassInfo.ClassType := AClassType;
   ClassInfo.AliasName := GetAlias(AClassType);
+  ClassInfo.CtorProc := ACtorProc;
   FRegistry := FRegistry + [ClassInfo];
 end;
 
