@@ -12,6 +12,7 @@ type
   end;
 
   TDatabaseConfig = record
+    Engine: string;
     ConnectionString: string;
     UserName: string;
     Password: string;

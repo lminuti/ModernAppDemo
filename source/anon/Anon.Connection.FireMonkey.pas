@@ -1,9 +1,10 @@
-unit Anon.Connection.Firebird;
+unit Anon.Connection.FireMonkey;
 
 interface
 
 uses
-  System.SysUtils, System.Classes, Data.DB, Anon.Interfaces, Demo.Core.Registry,
+  System.SysUtils, System.Classes, Data.DB, Anon.Interfaces,
+  Demo.Core.Registry, Demo.Core.Rtti,
 
   Winapi.Windows, Winapi.Messages, System.Variants, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
@@ -14,7 +15,8 @@ uses
 
 
 type
-  TFBConnection = class(TInterfacedObject, IConnection)
+  [Alias('FireMonkey')]
+  TFMConnection = class(TInterfacedObject, IConnection)
   private
     FConnection: TFDConnection;
   public
@@ -26,9 +28,9 @@ type
 
 implementation
 
-{ TFBConnection }
+{ TFMConnection }
 
-procedure TFBConnection.Connect(DatabaseConfig: TDatabaseConfig);
+procedure TFMConnection.Connect(DatabaseConfig: TDatabaseConfig);
 var
   ConfigValues: TStringList;
 begin
@@ -37,7 +39,6 @@ begin
     ConfigValues.Delimiter := ';';
     ConfigValues.StrictDelimiter := True;
     ConfigValues.DelimitedText := DatabaseConfig.ConnectionString;
-    ConfigValues.Values['DriverID'] := 'FB';
     ConfigValues.Values['User_Name'] := DatabaseConfig.UserName;
     ConfigValues.Values['Password'] := DatabaseConfig.Password;
 
@@ -49,19 +50,19 @@ begin
   end;
 end;
 
-constructor TFBConnection.Create;
+constructor TFMConnection.Create;
 begin
   inherited;
   FConnection := TFDConnection.Create(nil);
 end;
 
-destructor TFBConnection.Destroy;
+destructor TFMConnection.Destroy;
 begin
   FConnection.Free;
   inherited;
 end;
 
-procedure TFBConnection.FetchTable(const TableName: string;
+procedure TFMConnection.FetchTable(const TableName: string;
   AProc: TProc<TDataSet>);
 var
   LQuery: TFDQuery;
@@ -88,6 +89,6 @@ begin
 end;
 
 initialization
-  ClassRegistry.RegisterClass(TFBConnection);
+  ClassRegistry.RegisterClass(TFMConnection);
 
 end.

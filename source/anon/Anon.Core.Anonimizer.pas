@@ -40,10 +40,11 @@ begin
 
     // Fa il parsing delle informazioni relative alla connessione
     JsonDatabase := JsonConfig.GetValue<TJSONValue>('database');
+    DatabaseConfig.Engine := JsonDatabase.GetValue<string>('engine');
     DatabaseConfig.ConnectionString := JsonDatabase.GetValue<string>('connectionString');
     DatabaseConfig.UserName := JsonDatabase.GetValue<string>('userName');
     DatabaseConfig.Password := Params.Password;
-    Connection := ClassRegistry.GetClass<IConnection>;
+    Connection := ClassRegistry.GetClass<IConnection>(DatabaseConfig.Engine);
     Connection.Connect(DatabaseConfig);
 
     // Fa il parsing delle informazioni relative alle tabelle
