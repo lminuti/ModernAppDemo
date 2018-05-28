@@ -19,7 +19,6 @@ type
   TClassRegistry = class(TObject)
   private
     FRegistry: TClassInfoList;
-//    function GetRegistry: TClassInfoList;
     function GetAlias(AClassType: TClass): string;
   public
     function GetClass<T>: T; overload;
@@ -57,7 +56,6 @@ end;
 procedure TClassRegistry.ForEach<T>(AProc: TProc<TClass>);
 var
   ClassInfo: TClassInfo;
-  Frame: TObject;
 begin
   for ClassInfo in FRegistry do
   begin
@@ -83,11 +81,6 @@ begin
   if not TryGetClass<T>(AClassOrAlias, Result) then
     raise ERegistryError.CreateFmt('Classe [%s] non trovata (Alias: [%s])', [TRttiUtils.Context.GetType(TypeInfo(T)).Name, AClassOrAlias]);
 end;
-
-//function TClassRegistry.GetRegistry: TClassInfoList;
-//begin
-//  Result := FRegistry;
-//end;
 
 procedure TClassRegistry.RegisterClass(AClassType: TClass; ACtorProc: TFunc<TObject>);
 var

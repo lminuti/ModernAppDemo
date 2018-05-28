@@ -12,13 +12,9 @@ type
 
   TAnonimizer = class(TInterfacedObject, IAnonimizer)
   private
-    FPassword: string;
     procedure AnonimizeTable(Connection: IConnection; const TableName: string; JsonTable: TJSONValue);
-  protected
-    procedure SetPassword(const Value: string);
-    function GetPassword: string;
   public
-    procedure Anonimize(const FileName: string);
+    procedure Anonimize(const Params: TParameters);
   end;
 
 implementation
@@ -28,7 +24,7 @@ uses
 
 { TAnonimizer }
 
-procedure TAnonimizer.Anonimize(const FileName: string);
+procedure TAnonimizer.Anonimize(const Params: TParameters);
 var
   JsonConfig, JsonDatabase: TJSONValue;
   JsonTables: TJSONObject;
@@ -37,7 +33,7 @@ var
 
   Connection: IConnection;
 begin
-  JsonConfig := TJSONObject.ParseJSONValue(TFile.ReadAllText(FileName));
+  JsonConfig := TJSONObject.ParseJSONValue(TFile.ReadAllText(Params.FileName));
   try
     if not Assigned(JsonConfig) then
       raise EAnonimizerError.Create('Configurazione errata');
@@ -46,7 +42,7 @@ begin
     JsonDatabase := JsonConfig.GetValue<TJSONValue>('database');
     DatabaseConfig.ConnectionString := JsonDatabase.GetValue<string>('connectionString');
     DatabaseConfig.UserName := JsonDatabase.GetValue<string>('userName');
-    DatabaseConfig.Password := FPassword;
+    DatabaseConfig.Password := Params.Password;
     Connection := ClassRegistry.GetClass<IConnection>;
     Connection.Connect(DatabaseConfig);
 
@@ -95,16 +91,6 @@ begin
     GeneratorList.Free;
   end;
   TLogger.Log(lDebug, Format('%d rows updated', [NumOfRows]));
-end;
-
-function TAnonimizer.GetPassword: string;
-begin
-  Result := FPassword;
-end;
-
-procedure TAnonimizer.SetPassword(const Value: string);
-begin
-  FPassword := Value;
 end;
 
 initialization

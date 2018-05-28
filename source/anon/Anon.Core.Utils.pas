@@ -7,6 +7,8 @@ uses
 
 type
   TLogger = class
+  private
+    class var FLogger: ILogger;
   public
     class procedure Log(LogLevel: TLogLevel; const AMessage: string);
   end;
@@ -19,11 +21,11 @@ uses
   Demo.Core.Registry;
 
 class procedure TLogger.Log(LogLevel: TLogLevel; const AMessage: string);
-var
-  Logger: ILogger;
 begin
-  if ClassRegistry.TryGetClass<ILogger>(Logger) then
-    Logger.Log(LogLevel, AMessage);
+  if not Assigned(FLogger) then
+    FLogger := ClassRegistry.GetClass<ILogger>;
+
+  FLogger.Log(LogLevel, AMessage);
 end;
 
 end.

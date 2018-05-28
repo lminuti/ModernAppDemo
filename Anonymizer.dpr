@@ -22,16 +22,8 @@ uses
   Anon.Core.Utils in 'source\anon\Anon.Core.Utils.pas';
 
 begin
+  // Sarebbe meglio gestire le eccezioni...
   ReportMemoryLeaksOnShutdown := True;
-  try
-    TConsole.Run;
-  except
-    on E: Exception do
-    begin
-      SetConsoleTextAttribute(
-        GetStdHandle(STD_OUTPUT_HANDLE),
-        FOREGROUND_RED or FOREGROUND_INTENSITY);
-      WriteLn(ErrOutput, E.ClassName, ': ', E.Message);
-    end;
-  end;
+  with ClassRegistry.GetClass<IUserInterface> do
+    Run;
 end.

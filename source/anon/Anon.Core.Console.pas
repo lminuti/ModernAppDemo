@@ -8,18 +8,15 @@ uses
 type
   EConsoleError = class(Exception);
 
-  TConsole = class(TInterfacedObject, ILogger)
-  public
-    class procedure Run;
-  public
+  TConsole = class(TInterfacedObject, IUserInterface, ILogger)
+  private
     procedure ShowVersion;
     procedure ShowHelp;
     procedure Default;
-    procedure Anonymize(const FileName, Password: string);
+    procedure Anonymize(const Params: TParameters);
+  public
+    procedure Run;
     procedure Log(LogLevel: TLogLevel; const AMessage: string);
-
-    constructor Create;
-    destructor Destroy; override;
   end;
 
 implementation
@@ -32,35 +29,17 @@ const
 
 { TConsole }
 
-procedure TConsole.Anonymize(const FileName, Password: string);
+procedure TConsole.Anonymize(const Params: TParameters);
 var
   Anonimizer: IAnonimizer;
 begin
-  if FileName = '' then
+  if Params.FileName = '' then
     raise EConsoleError.Create('Nome file obbligatorio');
-  if not FileExists(FileName) then
-    raise EConsoleError.CreateFmt('File [%s] non trovato', [FileName]);
+  if not FileExists(Params.FileName) then
+    raise EConsoleError.CreateFmt('File [%s] non trovato', [Params.FileName]);
 
   Anonimizer := ClassRegistry.GetClass<IAnonimizer>;
-  Anonimizer.Password := Password;
-  Anonimizer.Anonimize(FileName);
-end;
-
-constructor TConsole.Create;
-begin
-  inherited Create;
-  // Sarebbe meglio deregistrarla sul destroy...
-  ClassRegistry.RegisterClass(TConsole,
-    function :TObject
-    begin
-      Result := Self;
-    end
-  );
-end;
-
-destructor TConsole.Destroy;
-begin
-  inherited;
+  Anonimizer.Anonimize(Params);
 end;
 
 procedure TConsole.Default;
@@ -71,41 +50,34 @@ end;
 procedure TConsole.Log(LogLevel: TLogLevel; const AMessage: string);
 const
   Colors: array [TLogLevel] of Word = (
-    FOREGROUND_INTENSITY or FOREGROUND_RED,    // Error
-    FOREGROUND_INTENSITY or FOREGROUND_RED or FOREGROUND_GREEN,        // Warning
-    FOREGROUND_INTENSITY or FOREGROUND_GREEN,  // Info
-    FOREGROUND_RED or FOREGROUND_GREEN or FOREGROUND_BLUE  // Debug
+    FOREGROUND_INTENSITY or FOREGROUND_RED,                      // Error
+    FOREGROUND_INTENSITY or FOREGROUND_RED or FOREGROUND_GREEN,  // Warning
+    FOREGROUND_INTENSITY or FOREGROUND_GREEN,                    // Info
+    FOREGROUND_RED or FOREGROUND_GREEN or FOREGROUND_BLUE        // Debug
   );
 begin
-  SetConsoleTextAttribute(
-    GetStdHandle(STD_OUTPUT_HANDLE),
-      Colors[LogLevel] or 0);
+  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), Colors[LogLevel]);
   Writeln(AMessage);
 end;
 
-class procedure TConsole.Run;
+procedure TConsole.Run;
 var
-  Console: TConsole;
-  FileName: string;
-  Password: string;
+  Params: TParameters;
 begin
-  Console := TConsole.Create;
   try
-    // Questo serve perché uso interfacce e classi (shame on me!)
-    Console._AddRef;
-
-    FindCmdLineSwitch('p', Password);
+    FindCmdLineSwitch('p', Params.Password);
 
     if FindCmdLineSwitch('v') then
-      Console.ShowVersion
+      ShowVersion
     else if FindCmdLineSwitch('h') then
-      Console.ShowHelp
-    else if FindCmdLineSwitch('f', FileName) then
-      Console.Anonymize(FileName, Password)
+      ShowHelp
+    else if FindCmdLineSwitch('f', Params.FileName) then
+      Anonymize(Params)
     else
-      Console.Default;
-  finally
-    Console._Release;
+      Default;
+  except
+    on E: Exception do
+      Log(lError, E.ClassName + ': ' + E.Message);
   end;
 end;
 
@@ -127,5 +99,8 @@ procedure TConsole.ShowVersion;
 begin
   Writeln(ExeName + ' V1.0');
 end;
+
+initialization
+  ClassRegistry.RegisterClass(TConsole);
 
 end.

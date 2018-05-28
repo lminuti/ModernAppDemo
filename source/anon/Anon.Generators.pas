@@ -18,7 +18,8 @@ implementation
 
 { TGeneratorList }
 
-uses Demo.Core.Registry;
+uses
+  Demo.Core.Registry;
 
 constructor TGeneratorList.CreateFromConfig(Config: TJSONObject);
 var
@@ -42,11 +43,15 @@ var
   Params: TArray<string>;
   ParamIndex: Integer;
 begin
+  JsonParams := nil;
+  SetLength(Params, 0);
   GeneratorName := Config.GetValue<string>('generator');
-  JsonParams := Config.GetValue<TJSONArray>('params');
+  if Config.TryGetValue<TJSONArray>('params', JsonParams) then
+  begin
   SetLength(Params, JsonParams.Count);
   for ParamIndex := 0 to JsonParams.Count - 1 do
     Params[ParamIndex] := JsonParams.Items[ParamIndex].GetValue<string>;
+  end;
 
   Result := ClassRegistry.GetClass<IGenerator>(GeneratorName);
   Result.SetParams(Params);
