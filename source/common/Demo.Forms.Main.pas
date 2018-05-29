@@ -68,15 +68,14 @@ end;
 procedure TFormMain.BuildMenu;
 var
   FrameTitle: FrameTitleAttribute;
+  ClassType: TClass;
 begin
-  ClassRegistry.ForEach<IFrame>(
-    procedure (ClassType: TClass)
-    begin
-      FrameTitle := TRttiUtils.FindAttribute<FrameTitleAttribute>(ClassType);
-      if Assigned(FrameTitle) then
-        CreateMenuButton(FrameTitle.Title, TCustomFrameClass(ClassType));
-    end
-  );
+  for ClassType in ClassRegistry do
+  begin
+    FrameTitle := TRttiUtils.FindAttribute<FrameTitleAttribute>(ClassType);
+    if Assigned(FrameTitle) then
+      CreateMenuButton(FrameTitle.Title, TCustomFrameClass(ClassType));
+  end;
 end;
 
 { TMenuButton }

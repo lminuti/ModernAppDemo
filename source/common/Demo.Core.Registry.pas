@@ -14,6 +14,8 @@ type
     CtorProc: TFunc<TObject>;
   end;
 
+  TClassEnumerator = class;
+
   TClassInfoList = array of TClassInfo;
 
   TClassRegistry = class(TObject)
@@ -23,10 +25,21 @@ type
   public
     function GetClass<T>: T; overload;
     function GetClass<T>(const AClassOrAlias: string): T; overload;
+    function GetEnumerator: TClassEnumerator;
     function TryGetClass<T>(out AValue: T): Boolean; overload;
     function TryGetClass<T>(const AClassOrAlias: string; out AValue: T): Boolean; overload;
     procedure RegisterClass(AClassType: TClass; ACtorProc: TFunc<TObject> = nil);
-    procedure ForEach<T>(AProc: TProc<TClass>);
+  end;
+
+  TClassEnumerator = class
+  private
+    FIndex: integer;
+    FClassRegistry: TClassRegistry;
+    function GetCurrent: TClass;
+  public
+    constructor Create(AClassRegistry: TClassRegistry);
+    function MoveNext: Boolean;
+    property Current: TClass read GetCurrent;
   end;
 
 function ClassRegistry: TClassRegistry;
@@ -53,19 +66,6 @@ begin
   Result := GetClass<T>('');
 end;
 
-procedure TClassRegistry.ForEach<T>(AProc: TProc<TClass>);
-var
-  ClassInfo: TClassInfo;
-begin
-  for ClassInfo in FRegistry do
-  begin
-    if Supports(ClassInfo.ClassType, GetTypeData(TypeInfo(T))^.Guid) then
-    begin
-      AProc(ClassInfo.ClassType);
-    end;
-  end;
-end;
-
 function TClassRegistry.GetAlias(AClassType: TClass): string;
 var
   AliasAttrib: AliasAttribute;
@@ -80,6 +80,11 @@ function TClassRegistry.GetClass<T>(const AClassOrAlias: string): T;
 begin
   if not TryGetClass<T>(AClassOrAlias, Result) then
     raise ERegistryError.CreateFmt('Classe [%s] non trovata (Alias: [%s])', [TRttiUtils.Context.GetType(TypeInfo(T)).Name, AClassOrAlias]);
+end;
+
+function TClassRegistry.GetEnumerator: TClassEnumerator;
+begin
+  Result := TClassEnumerator.Create(Self);
 end;
 
 procedure TClassRegistry.RegisterClass(AClassType: TClass; ACtorProc: TFunc<TObject>);
@@ -122,6 +127,29 @@ end;
 function TClassRegistry.TryGetClass<T>(out AValue: T): Boolean;
 begin
   Result := TryGetClass<T>('', AValue);
+end;
+
+{ TClassEnumerator }
+
+constructor TClassEnumerator.Create(AClassRegistry: TClassRegistry);
+begin
+  inherited Create;
+  FClassRegistry := AClassRegistry;
+  FIndex := -1;
+end;
+
+function TClassEnumerator.GetCurrent: TClass;
+begin
+  Result := FClassRegistry.FRegistry[FIndex].ClassType;
+end;
+
+function TClassEnumerator.MoveNext: Boolean;
+begin
+  Result := FIndex < Length(FClassRegistry.FRegistry) - 1;
+  if Result then
+  begin
+    Inc(FIndex);
+  end;
 end;
 
 initialization

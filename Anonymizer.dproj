@@ -83,7 +83,6 @@
         <DCCReference Include="source\common\Demo.Core.Rtti.pas"/>
         <DCCReference Include="source\anon\Anon.Interfaces.pas"/>
         <DCCReference Include="source\anon\Anon.Core.Anonimizer.pas"/>
-        <DCCReference Include="source\anon\Anon.Connection.Firebird.pas"/>
         <DCCReference Include="source\anon\Anon.Generators.pas"/>
         <DCCReference Include="source\anon\Anon.Generators.FirstName.pas"/>
         <DCCReference Include="source\anon\Anon.Generators.LastName.pas"/>
@@ -91,6 +90,7 @@
         <DCCReference Include="source\anon\Anon.Generators.RandomString.pas"/>
         <DCCReference Include="source\anon\Anon.Generators.CompanyName.pas"/>
         <DCCReference Include="source\anon\Anon.Core.Utils.pas"/>
+        <DCCReference Include="source\anon\Anon.Connection.FireMonkey.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
