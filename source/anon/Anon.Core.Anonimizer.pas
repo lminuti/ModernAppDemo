@@ -20,7 +20,7 @@ type
 implementation
 
 uses
-  Demo.Core.Registry, Demo.Core.Rtti, Anon.Generators, Anon.Core.Utils;
+  Demo.Core.ServiceLocator, Demo.Core.Rtti, Anon.Generators, Anon.Core.Utils;
 
 { TAnonimizer }
 
@@ -44,7 +44,7 @@ begin
     DatabaseConfig.ConnectionString := JsonDatabase.GetValue<string>('connectionString');
     DatabaseConfig.UserName := JsonDatabase.GetValue<string>('userName');
     DatabaseConfig.Password := Params.Password;
-    Connection := ClassRegistry.GetClass<IConnection>(DatabaseConfig.Engine);
+    Connection := ServiceLocator.GetClass<IConnection>(DatabaseConfig.Engine);
     Connection.Connect(DatabaseConfig);
 
     // Fa il parsing delle informazioni relative alle tabelle
@@ -96,6 +96,6 @@ end;
 
 initialization
 
-  ClassRegistry.RegisterClass(TAnonimizer);
+  ServiceLocator.RegisterClass(TAnonimizer);
 
 end.

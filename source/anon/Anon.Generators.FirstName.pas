@@ -3,7 +3,7 @@ unit Anon.Generators.FirstName;
 interface
 
 uses
-  SysUtils, Anon.Interfaces, Demo.Core.Registry, Demo.Core.Rtti;
+  SysUtils, Anon.Interfaces, Demo.Core.ServiceLocator, Demo.Core.Rtti;
 
 type
   [Alias('FirstName')]
@@ -14,6 +14,8 @@ type
   end;
 
 implementation
+
+{$region 'Random data for first names'}
 
 const
   FirstNames: array [0..58] of string = (
@@ -78,6 +80,8 @@ const
     'Jacopo'
 );
 
+{$endregion}
+
 { TFirstNameGenerator }
 
 function TFirstNameGenerator.GenerateValue: Variant;
@@ -95,6 +99,6 @@ begin
 end;
 
 initialization
-  ClassRegistry.RegisterClass(TFirstNameGenerator);
+  ServiceLocator.RegisterClass(TFirstNameGenerator);
 
 end.

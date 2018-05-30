@@ -1,10 +1,10 @@
-unit Anon.Connection.FireMonkey;
+unit Anon.Connection.FireDAC;
 
 interface
 
 uses
   System.SysUtils, System.Classes, Data.DB, Anon.Interfaces,
-  Demo.Core.Registry, Demo.Core.Rtti,
+  Demo.Core.ServiceLocator, Demo.Core.Rtti,
 
   Winapi.Windows, Winapi.Messages, System.Variants, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
@@ -15,8 +15,8 @@ uses
 
 
 type
-  [Alias('FireMonkey')]
-  TFMConnection = class(TInterfacedObject, IConnection)
+  [Alias('FireDAC')]
+  TFireDACConnection = class(TInterfacedObject, IConnection)
   private
     FConnection: TFDConnection;
   public
@@ -28,9 +28,9 @@ type
 
 implementation
 
-{ TFMConnection }
+{ TFireDACConnection }
 
-procedure TFMConnection.Connect(DatabaseConfig: TDatabaseConfig);
+procedure TFireDACConnection.Connect(DatabaseConfig: TDatabaseConfig);
 var
   ConfigValues: TStringList;
 begin
@@ -50,19 +50,19 @@ begin
   end;
 end;
 
-constructor TFMConnection.Create;
+constructor TFireDACConnection.Create;
 begin
   inherited;
   FConnection := TFDConnection.Create(nil);
 end;
 
-destructor TFMConnection.Destroy;
+destructor TFireDACConnection.Destroy;
 begin
   FConnection.Free;
   inherited;
 end;
 
-procedure TFMConnection.FetchTable(const TableName: string;
+procedure TFireDACConnection.FetchTable(const TableName: string;
   AProc: TProc<TDataSet>);
 var
   LQuery: TFDQuery;
@@ -89,6 +89,6 @@ begin
 end;
 
 initialization
-  ClassRegistry.RegisterClass(TFMConnection);
+  ServiceLocator.RegisterClass(TFireDACConnection);
 
 end.

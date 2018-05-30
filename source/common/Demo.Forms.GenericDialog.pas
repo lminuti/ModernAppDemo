@@ -37,7 +37,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Demo.Core.Registry;
+  Demo.Core.ServiceLocator;
 
 procedure TFormGenericDialog.Button1Click(Sender: TObject);
 begin
@@ -74,7 +74,7 @@ var
   ModalResult: TModalResult;
   Rect: TRect;
 begin
-  Frame := ClassRegistry.GetClass<T>(AClassOrAlias);
+  Frame := ServiceLocator.GetClass<T>(AClassOrAlias);
   Dialog := TFormGenericDialog.Create(nil);
   try
     Rect := Frame.GetClientRect;

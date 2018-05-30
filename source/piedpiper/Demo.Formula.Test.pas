@@ -14,7 +14,7 @@ type
 implementation
 
 uses
-  Demo.Core.Registry;
+  Demo.Core.ServiceLocator;
 
 { TPiedPiperCalculator }
 
@@ -25,6 +25,6 @@ end;
 
 initialization
 
-  ClassRegistry.RegisterClass(TPiedPiperCalculator);
+  ServiceLocator.RegisterClass(TPiedPiperCalculator);
 
 end.

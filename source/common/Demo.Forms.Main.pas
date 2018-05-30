@@ -37,7 +37,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Demo.Core.Registry, Demo.Modules.DBBuilder, Demo.Core.Rtti, Demo.Interfaces;
+  Demo.Core.ServiceLocator, Demo.Modules.DBBuilder, Demo.Core.Rtti, Demo.Interfaces;
 
 procedure TFormMain.CreateMenuButton(const AFrameTitle: string;
   AFrameClass: TCustomFrameClass);
@@ -70,7 +70,7 @@ var
   FrameTitle: FrameTitleAttribute;
   ClassType: TClass;
 begin
-  for ClassType in ClassRegistry do
+  for ClassType in ServiceLocator do
   begin
     FrameTitle := TRttiUtils.FindAttribute<FrameTitleAttribute>(ClassType);
     if Assigned(FrameTitle) then

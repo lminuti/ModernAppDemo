@@ -18,12 +18,12 @@ implementation
 { TLogger }
 
 uses
-  Demo.Core.Registry;
+  Demo.Core.ServiceLocator;
 
 class procedure TLogger.Log(LogLevel: TLogLevel; const AMessage: string);
 begin
   if not Assigned(FLogger) then
-    FLogger := ClassRegistry.GetClass<ILogger>;
+    FLogger := ServiceLocator.GetClass<ILogger>;
 
   FLogger.Log(LogLevel, AMessage);
 end;

@@ -3,7 +3,7 @@ unit Anon.Generators.RandomString;
 interface
 
 uses
-  SysUtils, Anon.Interfaces, Demo.Core.Registry, Demo.Core.Rtti;
+  SysUtils, Anon.Interfaces, Demo.Core.ServiceLocator, Demo.Core.Rtti;
 
 type
   [Alias('String')]
@@ -42,6 +42,6 @@ begin
 end;
 
 initialization
-  ClassRegistry.RegisterClass(TRandomStringGenerator);
+  ServiceLocator.RegisterClass(TRandomStringGenerator);
 
 end.

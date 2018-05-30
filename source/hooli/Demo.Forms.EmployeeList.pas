@@ -30,7 +30,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Demo.Core.Registry;
+  Demo.Core.ServiceLocator;
 
 { TFrameEmployeeList }
 
@@ -60,6 +60,6 @@ begin
 end;
 
 initialization
-  ClassRegistry.RegisterClass(TFrameEmployeeList);
+  ServiceLocator.RegisterClass(TFrameEmployeeList);
 
 end.

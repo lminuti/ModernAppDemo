@@ -22,7 +22,7 @@ type
 implementation
 
 uses
-  Demo.Core.Registry;
+  Demo.Core.ServiceLocator;
 
 const
   ExeName = 'ANONYMIZER';
@@ -38,7 +38,7 @@ begin
   if not FileExists(Params.FileName) then
     raise EConsoleError.CreateFmt('File [%s] non trovato', [Params.FileName]);
 
-  Anonimizer := ClassRegistry.GetClass<IAnonimizer>;
+  Anonimizer := ServiceLocator.GetClass<IAnonimizer>;
   Anonimizer.Anonimize(Params);
 end;
 
@@ -101,6 +101,6 @@ begin
 end;
 
 initialization
-  ClassRegistry.RegisterClass(TConsole);
+  ServiceLocator.RegisterClass(TConsole);
 
 end.

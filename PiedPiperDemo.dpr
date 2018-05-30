@@ -2,7 +2,6 @@ program PiedPiperDemo;
 
 uses
   Vcl.Forms,
-  Demo.Core.Registry in 'source\common\Demo.Core.Registry.pas',
   Demo.Forms.GenericDialog in 'source\common\Demo.Forms.GenericDialog.pas' {FormGenericDialog},
   Demo.Forms.Main in 'source\common\Demo.Forms.Main.pas' {FormMain},
   Demo.Forms.Test in 'source\common\Demo.Forms.Test.pas' {FrameTest: TFrame},
@@ -11,7 +10,8 @@ uses
   Demo.Interfaces in 'source\common\Demo.Interfaces.pas',
   Demo.Formula.Test in 'source\piedpiper\Demo.Formula.Test.pas',
   Demo.Core.Rtti in 'source\common\Demo.Core.Rtti.pas',
-  Demo.Modules.Main in 'source\common\Demo.Modules.Main.pas' {DataModuleMain: TDataModule};
+  Demo.Modules.Main in 'source\common\Demo.Modules.Main.pas' {DataModuleMain: TDataModule},
+  Demo.Core.ServiceLocator in 'source\common\Demo.Core.ServiceLocator.pas';
 
 {$R *.res}
 

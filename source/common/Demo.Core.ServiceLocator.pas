@@ -1,4 +1,4 @@
-unit Demo.Core.Registry;
+unit Demo.Core.ServiceLocator;
 
 interface
 
@@ -18,7 +18,7 @@ type
 
   TClassInfoList = array of TClassInfo;
 
-  TClassRegistry = class(TObject)
+  TServiceLocator = class(TObject)
   private
     FRegistry: TClassInfoList;
     function GetAlias(AClassType: TClass): string;
@@ -34,15 +34,15 @@ type
   TClassEnumerator = class
   private
     FIndex: integer;
-    FClassRegistry: TClassRegistry;
+    FClassRegistry: TServiceLocator;
     function GetCurrent: TClass;
   public
-    constructor Create(AClassRegistry: TClassRegistry);
+    constructor Create(AClassRegistry: TServiceLocator);
     function MoveNext: Boolean;
     property Current: TClass read GetCurrent;
   end;
 
-function ClassRegistry: TClassRegistry;
+function ServiceLocator: TServiceLocator;
 
 implementation
 
@@ -50,23 +50,23 @@ uses
   System.TypInfo, Demo.Core.Rtti;
 
 var
-  GlobalClassRegistry: TClassRegistry;
+  GlobalServiceLocator: TServiceLocator;
 
-function ClassRegistry: TClassRegistry;
+function ServiceLocator: TServiceLocator;
 begin
-  if not Assigned(GlobalClassRegistry) then
-    GlobalClassRegistry := TClassRegistry.Create;
-  Result := GlobalClassRegistry;
+  if not Assigned(GlobalServiceLocator) then
+    GlobalServiceLocator := TServiceLocator.Create;
+  Result := GlobalServiceLocator;
 end;
 
-{ TClassRegistry }
+{ TServiceLocator }
 
-function TClassRegistry.GetClass<T>: T;
+function TServiceLocator.GetClass<T>: T;
 begin
   Result := GetClass<T>('');
 end;
 
-function TClassRegistry.GetAlias(AClassType: TClass): string;
+function TServiceLocator.GetAlias(AClassType: TClass): string;
 var
   AliasAttrib: AliasAttribute;
 begin
@@ -76,18 +76,18 @@ begin
     Result := AliasAttrib.Alias;
 end;
 
-function TClassRegistry.GetClass<T>(const AClassOrAlias: string): T;
+function TServiceLocator.GetClass<T>(const AClassOrAlias: string): T;
 begin
   if not TryGetClass<T>(AClassOrAlias, Result) then
     raise ERegistryError.CreateFmt('Classe [%s] non trovata (Alias: [%s])', [TRttiUtils.Context.GetType(TypeInfo(T)).Name, AClassOrAlias]);
 end;
 
-function TClassRegistry.GetEnumerator: TClassEnumerator;
+function TServiceLocator.GetEnumerator: TClassEnumerator;
 begin
   Result := TClassEnumerator.Create(Self);
 end;
 
-procedure TClassRegistry.RegisterClass(AClassType: TClass; ACtorProc: TFunc<TObject>);
+procedure TServiceLocator.RegisterClass(AClassType: TClass; ACtorProc: TFunc<TObject>);
 var
   ClassInfo: TClassInfo;
 begin
@@ -97,7 +97,7 @@ begin
   FRegistry := FRegistry + [ClassInfo];
 end;
 
-function TClassRegistry.TryGetClass<T>(const AClassOrAlias: string;
+function TServiceLocator.TryGetClass<T>(const AClassOrAlias: string;
   out AValue: T): Boolean;
 var
   ClassInfo: TClassInfo;
@@ -124,14 +124,14 @@ begin
   end;
 end;
 
-function TClassRegistry.TryGetClass<T>(out AValue: T): Boolean;
+function TServiceLocator.TryGetClass<T>(out AValue: T): Boolean;
 begin
   Result := TryGetClass<T>('', AValue);
 end;
 
 { TClassEnumerator }
 
-constructor TClassEnumerator.Create(AClassRegistry: TClassRegistry);
+constructor TClassEnumerator.Create(AClassRegistry: TServiceLocator);
 begin
   inherited Create;
   FClassRegistry := AClassRegistry;
@@ -153,9 +153,9 @@ begin
 end;
 
 initialization
-  GlobalClassRegistry := nil;
+  GlobalServiceLocator := nil;
 
 finalization
-  GlobalClassRegistry.Free;
+  GlobalServiceLocator.Free;
 
 end.

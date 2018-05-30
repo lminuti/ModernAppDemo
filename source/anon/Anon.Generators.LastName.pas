@@ -3,7 +3,7 @@ unit Anon.Generators.LastName;
 interface
 
 uses
-  SysUtils, Anon.Interfaces, Demo.Core.Registry, Demo.Core.Rtti;
+  SysUtils, Anon.Interfaces, Demo.Core.ServiceLocator, Demo.Core.Rtti;
 
 type
   [Alias('LastName')]
@@ -14,6 +14,8 @@ type
   end;
 
 implementation
+
+{$region 'Random data for last names'}
 
 const
   LastNames: array [0..99] of string = (
@@ -119,6 +121,8 @@ const
     'Negri'
   );
 
+{$endregion}
+
 { TLastNameGenerator }
 
 function TLastNameGenerator.GenerateValue: Variant;
@@ -136,6 +140,6 @@ begin
 end;
 
 initialization
-  ClassRegistry.RegisterClass(TLastNameGenerator);
+  ServiceLocator.RegisterClass(TLastNameGenerator);
 
 end.

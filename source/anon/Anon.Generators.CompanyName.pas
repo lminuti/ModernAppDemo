@@ -3,7 +3,7 @@ unit Anon.Generators.CompanyName;
 interface
 
 uses
-  SysUtils, Anon.Interfaces, Demo.Core.Registry, Demo.Core.Rtti;
+  SysUtils, Anon.Interfaces, Demo.Core.ServiceLocator, Demo.Core.Rtti;
 
 type
   [Alias('CompanyName')]
@@ -14,6 +14,8 @@ type
   end;
 
 implementation
+
+{$region 'Random data for company names'}
 
 const
   CompanyNames: array [0..196] of string = (
@@ -216,6 +218,8 @@ const
     'Square Inc.'
 );
 
+{$endregion}
+
 { TCompanyNameGenerator }
 
 function TCompanyNameGenerator.GenerateValue: Variant;
@@ -233,6 +237,6 @@ begin
 end;
 
 initialization
-  ClassRegistry.RegisterClass(TCompanyNameGenerator);
+  ServiceLocator.RegisterClass(TCompanyNameGenerator);
 
 end.

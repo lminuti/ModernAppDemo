@@ -3,7 +3,7 @@ unit Anon.Generators.Date;
 interface
 
 uses
-  SysUtils, Anon.Interfaces, Demo.Core.Registry, Demo.Core.Rtti;
+  SysUtils, Anon.Interfaces, Demo.Core.ServiceLocator, Demo.Core.Rtti;
 
 type
   [Alias('Date')]
@@ -45,6 +45,6 @@ begin
 end;
 
 initialization
-  ClassRegistry.RegisterClass(TDateGenerator);
+  ServiceLocator.RegisterClass(TDateGenerator);
 
 end.

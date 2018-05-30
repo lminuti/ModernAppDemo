@@ -36,7 +36,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Demo.Core.Registry, Demo.Forms.GenericDialog;
+  Demo.Core.ServiceLocator, Demo.Forms.GenericDialog;
 
 procedure TFrameTest.ButtonSeachEmpNoClick(Sender: TObject);
 begin
@@ -58,7 +58,7 @@ procedure TFrameTest.Button1Click(Sender: TObject);
 var
   Calculator: ICalculator;
 begin
-  Calculator := ClassRegistry.GetClass<ICalculator>;
+  Calculator := ServiceLocator.GetClass<ICalculator>;
   Edit3.Text := Calculator.Calculate(StrToInt(Edit1.Text), StrToInt(Edit2.Text)).ToString;
 end;
 
@@ -73,6 +73,6 @@ begin
 end;
 
 initialization
-  ClassRegistry.RegisterClass(TFrameTest);
+  ServiceLocator.RegisterClass(TFrameTest);
 
 end.

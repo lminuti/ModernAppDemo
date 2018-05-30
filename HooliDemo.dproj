@@ -91,7 +91,6 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="source\common\Demo.Core.Registry.pas"/>
         <DCCReference Include="source\common\Demo.Forms.GenericDialog.pas">
             <Form>FormGenericDialog</Form>
         </DCCReference>
@@ -117,6 +116,7 @@
             <Form>DataModuleMain</Form>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
+        <DCCReference Include="source\common\Demo.Core.ServiceLocator.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
