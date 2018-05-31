@@ -78,19 +78,19 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="source\anon\Anon.Core.Console.pas"/>
-        <DCCReference Include="source\anon\Anon.Interfaces.pas"/>
-        <DCCReference Include="source\anon\Anon.Core.Anonimizer.pas"/>
-        <DCCReference Include="source\anon\Anon.Generators.pas"/>
-        <DCCReference Include="source\anon\Anon.Generators.FirstName.pas"/>
-        <DCCReference Include="source\anon\Anon.Generators.LastName.pas"/>
-        <DCCReference Include="source\anon\Anon.Generators.Date.pas"/>
-        <DCCReference Include="source\anon\Anon.Generators.RandomString.pas"/>
-        <DCCReference Include="source\anon\Anon.Generators.CompanyName.pas"/>
-        <DCCReference Include="source\anon\Anon.Core.Utils.pas"/>
-        <DCCReference Include="source\anon\Anon.Connection.FireDAC.pas"/>
         <DCCReference Include="..\Dynamo\Demo.Core.Rtti.pas"/>
         <DCCReference Include="..\Dynamo\Demo.Core.ServiceLocator.pas"/>
+        <DCCReference Include="Anon.Connection.FireDAC.pas"/>
+        <DCCReference Include="Anon.Core.Anonimizer.pas"/>
+        <DCCReference Include="Anon.Core.Console.pas"/>
+        <DCCReference Include="Anon.Core.Utils.pas"/>
+        <DCCReference Include="Anon.Generators.CompanyName.pas"/>
+        <DCCReference Include="Anon.Generators.Date.pas"/>
+        <DCCReference Include="Anon.Generators.FirstName.pas"/>
+        <DCCReference Include="Anon.Generators.LastName.pas"/>
+        <DCCReference Include="Anon.Generators.pas"/>
+        <DCCReference Include="Anon.Generators.RandomString.pas"/>
+        <DCCReference Include="Anon.Interfaces.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

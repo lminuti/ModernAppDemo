@@ -7,19 +7,19 @@ program Anonymizer;
 uses
   WinApi.Windows,
   System.SysUtils,
-  Anon.Core.Console in 'source\anon\Anon.Core.Console.pas',
-  Anon.Interfaces in 'source\anon\Anon.Interfaces.pas',
-  Anon.Core.Anonimizer in 'source\anon\Anon.Core.Anonimizer.pas',
-  Anon.Generators in 'source\anon\Anon.Generators.pas',
-  Anon.Generators.FirstName in 'source\anon\Anon.Generators.FirstName.pas',
-  Anon.Generators.LastName in 'source\anon\Anon.Generators.LastName.pas',
-  Anon.Generators.Date in 'source\anon\Anon.Generators.Date.pas',
-  Anon.Generators.RandomString in 'source\anon\Anon.Generators.RandomString.pas',
-  Anon.Generators.CompanyName in 'source\anon\Anon.Generators.CompanyName.pas',
-  Anon.Core.Utils in 'source\anon\Anon.Core.Utils.pas',
-  Anon.Connection.FireDAC in 'source\anon\Anon.Connection.FireDAC.pas',
   Demo.Core.Rtti in '..\Dynamo\Demo.Core.Rtti.pas',
-  Demo.Core.ServiceLocator in '..\Dynamo\Demo.Core.ServiceLocator.pas';
+  Demo.Core.ServiceLocator in '..\Dynamo\Demo.Core.ServiceLocator.pas',
+  Anon.Connection.FireDAC in 'Anon.Connection.FireDAC.pas',
+  Anon.Core.Anonimizer in 'Anon.Core.Anonimizer.pas',
+  Anon.Core.Console in 'Anon.Core.Console.pas',
+  Anon.Core.Utils in 'Anon.Core.Utils.pas',
+  Anon.Generators.CompanyName in 'Anon.Generators.CompanyName.pas',
+  Anon.Generators.Date in 'Anon.Generators.Date.pas',
+  Anon.Generators.FirstName in 'Anon.Generators.FirstName.pas',
+  Anon.Generators.LastName in 'Anon.Generators.LastName.pas',
+  Anon.Generators in 'Anon.Generators.pas',
+  Anon.Generators.RandomString in 'Anon.Generators.RandomString.pas',
+  Anon.Interfaces in 'Anon.Interfaces.pas';
 
 begin
   // Sarebbe meglio gestire le eccezioni...
