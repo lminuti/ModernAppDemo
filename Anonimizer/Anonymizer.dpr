@@ -8,7 +8,6 @@ uses
   WinApi.Windows,
   System.SysUtils,
   Anon.Core.Console in 'source\anon\Anon.Core.Console.pas',
-  Demo.Core.Rtti in 'source\common\Demo.Core.Rtti.pas',
   Anon.Interfaces in 'source\anon\Anon.Interfaces.pas',
   Anon.Core.Anonimizer in 'source\anon\Anon.Core.Anonimizer.pas',
   Anon.Generators in 'source\anon\Anon.Generators.pas',
@@ -19,7 +18,8 @@ uses
   Anon.Generators.CompanyName in 'source\anon\Anon.Generators.CompanyName.pas',
   Anon.Core.Utils in 'source\anon\Anon.Core.Utils.pas',
   Anon.Connection.FireDAC in 'source\anon\Anon.Connection.FireDAC.pas',
-  Demo.Core.ServiceLocator in 'source\common\Demo.Core.ServiceLocator.pas';
+  Demo.Core.Rtti in '..\Dynamo\Demo.Core.Rtti.pas',
+  Demo.Core.ServiceLocator in '..\Dynamo\Demo.Core.ServiceLocator.pas';
 
 begin
   // Sarebbe meglio gestire le eccezioni...

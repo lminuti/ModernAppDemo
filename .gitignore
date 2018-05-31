@@ -4,5 +4,5 @@
 *.dcu
 /__history
 __history
-/Win32/Debug
+Win32
 *.stat
