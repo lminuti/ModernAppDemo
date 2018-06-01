@@ -16,6 +16,7 @@ type
     ConnectionString: string;
     UserName: string;
     Password: string;
+    AutoCreateDatabase: Boolean;
   end;
 
   TLogLevel = (lError, lWarning, lInfo, lDebug);

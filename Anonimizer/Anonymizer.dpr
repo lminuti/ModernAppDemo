@@ -4,6 +4,10 @@ program Anonymizer;
 
 {$R *.res}
 
+
+
+{$R 'Anon.Resource.res' 'Anon.Resource.rc'}
+
 uses
   WinApi.Windows,
   System.SysUtils,

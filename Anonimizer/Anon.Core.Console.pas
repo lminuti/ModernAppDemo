@@ -10,6 +10,7 @@ type
 
   TConsole = class(TInterfacedObject, IUserInterface, ILogger)
   private
+    procedure Pause;
     procedure ShowVersion;
     procedure ShowHelp;
     procedure Default;
@@ -48,6 +49,19 @@ begin
 end;
 
 procedure TConsole.Log(LogLevel: TLogLevel; const AMessage: string);
+
+  function GetConsoleColor(hConsoleOutput: THandle; out AColor: Word): Boolean;
+  var
+    ConsoleInfo: CONSOLE_SCREEN_BUFFER_INFO;
+  begin
+    GetConsoleScreenBufferInfo(hConsoleOutput, ConsoleInfo);
+    AColor := ConsoleInfo.wAttributes;
+    Result := True;
+  end;
+
+var
+  DefaultColor: Word;
+  nStdHandle: DWORD;
 const
   Colors: array [TLogLevel] of Word = (
     FOREGROUND_INTENSITY or FOREGROUND_RED,                      // Error
@@ -56,8 +70,23 @@ const
     FOREGROUND_RED or FOREGROUND_GREEN or FOREGROUND_BLUE        // Debug
   );
 begin
-  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), Colors[LogLevel]);
+  if LogLevel = lError then
+    nStdHandle := STD_ERROR_HANDLE
+  else
+    nStdHandle := STD_OUTPUT_HANDLE;
+
+  GetConsoleColor(GetStdHandle(nStdHandle), DefaultColor);
+  SetConsoleTextAttribute(GetStdHandle(nStdHandle), Colors[LogLevel]);
   Writeln(AMessage);
+  SetConsoleTextAttribute(GetStdHandle(nStdHandle), DefaultColor);
+end;
+
+procedure TConsole.Pause;
+begin
+  {$IFDEF DEBUG}
+  Writeln('Press any key....');
+  Readln;
+  {$ENDIF}
 end;
 
 procedure TConsole.Run;
@@ -77,15 +106,19 @@ begin
       Default;
   except
     on E: Exception do
-      Log(lError, E.ClassName + ': ' + E.Message);
+    begin
+      if not (E is EAbort) then
+        Log(lError, E.ClassName + ': ' + E.Message);
+    end;
   end;
+  Pause;
 end;
 
 procedure TConsole.ShowHelp;
 begin
   Writeln('Anonimizza una base dati');
   Writeln('');
-  Writeln(ExeName + '[/H] [/V] [/P password] [/F nomefile]');
+  Writeln(ExeName + '[/H] [/V] [/A ][/P password] [/F nomefile]');
   Writeln('');
   Writeln('/V        Mostra Versione');
   Writeln('/H        Questo help');

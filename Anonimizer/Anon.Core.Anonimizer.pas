@@ -44,6 +44,8 @@ begin
     DatabaseConfig.ConnectionString := JsonDatabase.GetValue<string>('connectionString');
     DatabaseConfig.UserName := JsonDatabase.GetValue<string>('userName');
     DatabaseConfig.Password := Params.Password;
+    if not JsonDatabase.TryGetValue<boolean>('autoCreateDatabase', DatabaseConfig.AutoCreateDatabase) then
+      DatabaseConfig.AutoCreateDatabase := False;
     Connection := ServiceLocator.GetClass<IConnection>(DatabaseConfig.Engine);
     Connection.Connect(DatabaseConfig);
 

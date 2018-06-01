@@ -11,14 +11,16 @@ uses
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.VCLUI.Wait,
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
   FireDAC.Phys.FBDef, FireDAC.Phys.IBBase, FireDAC.Phys.FB,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
-
+  FireDAC.Phys.SQLiteDef, FireDAC.Phys.SQLite,
+  FireDAC.Comp.ScriptCommands,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Comp.Script;
 
 type
   [Alias('FireDAC')]
   TFireDACConnection = class(TInterfacedObject, IConnection)
   private
     FConnection: TFDConnection;
+    procedure InitDatabase;
   public
     procedure Connect(DatabaseConfig: TDatabaseConfig);
     procedure FetchTable(const TableName: string; AProc: TProc<TDataSet>);
@@ -33,7 +35,10 @@ implementation
 procedure TFireDACConnection.Connect(DatabaseConfig: TDatabaseConfig);
 var
   ConfigValues: TStringList;
+  AutoCreateDatabase: Boolean;
 begin
+  AutoCreateDatabase := False;
+
   ConfigValues := TStringList.Create;
   try
     ConfigValues.Delimiter := ';';
@@ -42,12 +47,18 @@ begin
     ConfigValues.Values['User_Name'] := DatabaseConfig.UserName;
     ConfigValues.Values['Password'] := DatabaseConfig.Password;
 
+    if (DatabaseConfig.AutoCreateDatabase) and (not FileExists(ConfigValues.Values['Database'])) then
+      AutoCreateDatabase := True;
+
     FConnection.Params.Assign(ConfigValues);
     FConnection.Connected := True;
 
   finally
     ConfigValues.Free;
   end;
+
+  if AutoCreateDatabase then
+    InitDatabase;
 end;
 
 constructor TFireDACConnection.Create;
@@ -85,6 +96,31 @@ begin
     end;
   finally
     LQuery.Free;
+  end;
+end;
+
+procedure TFireDACConnection.InitDatabase;
+const
+  SQLLiteCreateDB = 'ANON_SQLLITE_CREATEDB'; // resource name
+var
+  FDScript: TFDScript;
+  FDSQLScript: TFDSQLScript;
+  SQLScriptStream: TStream;
+begin
+  FDScript := TFDScript.Create(nil);
+  try
+    FDScript.Connection := FConnection;
+    FDSQLScript := FDScript.SQLScripts.Add;
+    SQLScriptStream := TResourceStream.Create(HInstance, SQLLiteCreateDB, RT_RCDATA);
+    try
+      SQLScriptStream.Position := 0;
+      FDSQLScript.SQL.LoadFromStream(SQLScriptStream);
+    finally
+      SQLScriptStream.Free;
+    end;
+    FDScript.ExecuteAll;
+  finally
+    FDScript.Free;
   end;
 end;
 
