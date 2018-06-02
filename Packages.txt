@@ -1,0 +1,16 @@
+* Tolgo le dipendeza da SQLite e FB da TPersistanceFactory
+* Aggiungo il ServiceLocator
+* Aggiungo gli alias e registro TPersistanceDbxFirebirdFactory e TPersistanceFireDacSQLiteFactory
+* Uso il service locator stando attento al fatto che le classi sono singleton
+
+- Sì può fare vedere che tramite alias posso scegliere un IPersistanceLayerFactory in base alla linea di comando 
+
+* Attivare i package runtime: project|options => Packages|runtime|linkwith runtime packages
+* Pulire la lista dei package: es.  rtl;vcl;vclimg;vcldb;vclx;dbrtl;vclactnband;MicroGestBasePkg
+DBXSqliteDriver;fmxase;DBXDb2Driver;DBXInterBaseDriver;vclactnband;vclFireDAC;tethering;svnui;FireDACADSDriver;DBXMSSQLDriver;FireDACMSSQLDriver;vcltouch;vcldb;bindcompfmx;svn;DBXOracleDriver;inetdb;FmxTeeUI;emsedge;fmx;fmxdae;vclib;FireDACDBXDriver;dbexpress;IndyCore;vclx;dsnap;DataSnapCommon;WiRLRunTime;DataSnapConnectors;VCLRESTComponents;vclie;bindengine;DBXMySQLDriver;FireDACOracleDriver;FireDACMySQLDriver;DBXFirebirdDriver;ibdacfmx250;vquery250;FireDACCommonODBC;DataSnapClient;IndyIPCommon;bindcompdbx;vcl;IndyIPServer;DBXSybaseASEDriver;dac250;IndySystem;FireDACDb2Driver;dsnapcon;FireDACMSAccDriver;fmxFireDAC;FireDACInfxDriver;vclimg;ibdac250;TeeDB;ibdacvcl250;emshosting;FireDACPgDriver;ibmonitor;FireDACASADriver;DBXOdbcDriver;FireDACTDataDriver;FMXTee;DbxCommonDriver;ibxpress;Tee;DataSnapServer;xmlrtl;DataSnapNativeClient;fmxobj;vclwinx;FireDACDSDriver;rtl;ibxbindings;DbxClientDriver;dacvcl250;DBXSybaseASADriver;CustomIPTransport;vcldsnap;bindcomp;appanalytics;DBXInformixDriver;crcontrols250;IndyIPClient;bindcompvcl;TeeUI;dbxcds;VclSmp;adortl;FireDACODBCDriver;VCLXDBGrid250;DataSnapIndy10ServerTransport;dacfmx250;dsnapxml;DataSnapProviderClient;dbrtl;IndyProtocols;inetdbxpress;FireDACMongoDBDriver;DataSnapServerMidas;RESTComponents;emsclientfiredac;DataSnapFireDAC;FireDACIBDriver;emsclient;FireDACCommon;RESTBackendComponents;soapserver;CloudService;FireDACCommonDriver;inet;FireDAC;FireDACSqliteDriver;soaprtl;soapmidas
+* Creare MicroGestBasePkg con le due unit di Dynamo e Persistent.Interfaces (da togliere dal progetto principale)
+* Aggiungere al progetto il riferimento a MicroGestBasePkg sotto la lista dei package 
+* Creare i due Package (SQLite e Firebird) con:
+  - La unit che implementa IPersistanceLayerFactory
+  - La require MicroGestBasePkg
+  
