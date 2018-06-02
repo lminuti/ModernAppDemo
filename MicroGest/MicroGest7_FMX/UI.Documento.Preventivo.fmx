@@ -1,0 +1,86 @@
+inherited UIPreventivo: TUIPreventivo
+  inherited ToolBarTop: TToolBar
+    inherited Title: TLabel
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+    end
+  end
+  inherited ListBox1: TListBox
+    Viewport.Width = 348.000000000000000000
+    Viewport.Height = 62.000000000000000000
+    inherited ListBoxItem1: TListBoxItem
+      inherited EditCliente: TEdit
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+      end
+    end
+    inherited ListBoxItem2: TListBoxItem
+      inherited EditData: TDateEdit
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+      end
+    end
+  end
+  inherited ListBox2: TListBox
+    Position.Y = 362.000000000000000000
+    Size.Height = 168.000000000000000000
+    Viewport.Width = 348.000000000000000000
+    Viewport.Height = 164.000000000000000000
+    inherited ListBoxItem3: TListBoxItem
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      inherited EditTotaleImponibile: TEdit
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+      end
+    end
+    inherited ListBoxItem4: TListBoxItem
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      inherited EditTotaleIVA: TEdit
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+      end
+    end
+    inherited ListBoxItem5: TListBoxItem
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      inherited EditTotaleDocumento: TEdit
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+      end
+    end
+    object ListBoxItem8: TListBoxItem
+      Position.Y = 131.000000000000000000
+      Size.Width = 348.000000000000000000
+      Size.Height = 30.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 5
+      Text = 'Validit'#224' (GG)'
+      object EditValidita: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Left
+        TabOrder = 1
+        TextSettings.HorzAlign = Center
+        Position.X = 150.000000000000000000
+        Position.Y = 2.000000000000000000
+        Margins.Left = 150.000000000000000000
+        Margins.Top = 2.000000000000000000
+        Margins.Right = 2.000000000000000000
+        Margins.Bottom = 2.000000000000000000
+        Size.Width = 50.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        StyledSettings = [Family, Size, FontColor]
+      end
+    end
+  end
+  inherited ListViewRighe: TListView
+    Size.Height = 256.000000000000000000
+  end
+  inherited DocMemTable: TFDMemTable
+    object DocMemTableVALIDITA_GG: TIntegerField
+      FieldName = 'VALIDITA_GG'
+    end
+  end
+  inherited BindingsList1: TBindingsList
+    object LinkControlToField9: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = DocBindSourceDB
+      FieldName = 'VALIDITA_GG'
+      Control = EditValidita
+      Track = False
+    end
+  end
+end

@@ -1,0 +1,29 @@
+inherited StartForm_LgXhdpiPh: TStartForm_LgXhdpiPh
+  ClientHeight = 695
+  ClientWidth = 450
+  OnKeyUp = FormKeyUp
+  DesignerMasterStyle = 0
+  inherited MainTabControl: TTabControl
+    Size.Width = 450.000000000000000000
+    Size.Height = 695.000000000000000000
+    Sizes = (
+      450s
+      695s)
+    inherited TabItemMain: TTabItem
+      ExplicitSize.cx = 8.000000000000000000
+      ExplicitSize.cy = 8.000000000000000000
+      inherited ToolBarTop: TToolBar
+        Size.Width = 450.000000000000000000
+        Size.Height = 48.000000000000000000
+        inherited SpeedButton1: TSpeedButton
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
+        end
+      end
+      inherited ListView1: TListView
+        Size.Width = 450.000000000000000000
+        Size.Height = 647.000000000000000000
+      end
+    end
+  end
+end
