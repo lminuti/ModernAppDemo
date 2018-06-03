@@ -27,6 +27,18 @@
         <Projects Include="MicroGest7_FMX\MicroGest7_FMX.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="MicroGest8\MicroGest8.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="MicroGest8\MicroGestBasePkg.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="MicroGest8\MicroGestSQLitePkg.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="MicroGest8\MicroGestFirebirdPkg.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -107,14 +119,50 @@
     <Target Name="MicroGest7_FMX:Make">
         <MSBuild Projects="MicroGest7_FMX\MicroGest7_FMX.dproj" Targets="Make"/>
     </Target>
+    <Target Name="MicroGest8">
+        <MSBuild Projects="MicroGest8\MicroGest8.dproj"/>
+    </Target>
+    <Target Name="MicroGest8:Clean">
+        <MSBuild Projects="MicroGest8\MicroGest8.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="MicroGest8:Make">
+        <MSBuild Projects="MicroGest8\MicroGest8.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="MicroGestBasePkg">
+        <MSBuild Projects="MicroGest8\MicroGestBasePkg.dproj"/>
+    </Target>
+    <Target Name="MicroGestBasePkg:Clean">
+        <MSBuild Projects="MicroGest8\MicroGestBasePkg.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="MicroGestBasePkg:Make">
+        <MSBuild Projects="MicroGest8\MicroGestBasePkg.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="MicroGestSQLitePkg">
+        <MSBuild Projects="MicroGest8\MicroGestSQLitePkg.dproj"/>
+    </Target>
+    <Target Name="MicroGestSQLitePkg:Clean">
+        <MSBuild Projects="MicroGest8\MicroGestSQLitePkg.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="MicroGestSQLitePkg:Make">
+        <MSBuild Projects="MicroGest8\MicroGestSQLitePkg.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="MicroGestFirebirdPkg">
+        <MSBuild Projects="MicroGest8\MicroGestFirebirdPkg.dproj"/>
+    </Target>
+    <Target Name="MicroGestFirebirdPkg:Clean">
+        <MSBuild Projects="MicroGest8\MicroGestFirebirdPkg.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="MicroGestFirebirdPkg:Make">
+        <MSBuild Projects="MicroGest8\MicroGestFirebirdPkg.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="MicroGest1;MicroGest2;MicroGest3;MicroGest4;MicroGest5;MicroGest6;MicroGest7;MicroGest7_FMX"/>
+        <CallTarget Targets="MicroGest1;MicroGest2;MicroGest3;MicroGest4;MicroGest5;MicroGest6;MicroGest7;MicroGest7_FMX;MicroGest8;MicroGestBasePkg;MicroGestSQLitePkg;MicroGestFirebirdPkg"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="MicroGest1:Clean;MicroGest2:Clean;MicroGest3:Clean;MicroGest4:Clean;MicroGest5:Clean;MicroGest6:Clean;MicroGest7:Clean;MicroGest7_FMX:Clean"/>
+        <CallTarget Targets="MicroGest1:Clean;MicroGest2:Clean;MicroGest3:Clean;MicroGest4:Clean;MicroGest5:Clean;MicroGest6:Clean;MicroGest7:Clean;MicroGest7_FMX:Clean;MicroGest8:Clean;MicroGestBasePkg:Clean;MicroGestSQLitePkg:Clean;MicroGestFirebirdPkg:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="MicroGest1:Make;MicroGest2:Make;MicroGest3:Make;MicroGest4:Make;MicroGest5:Make;MicroGest6:Make;MicroGest7:Make;MicroGest7_FMX:Make"/>
+        <CallTarget Targets="MicroGest1:Make;MicroGest2:Make;MicroGest3:Make;MicroGest4:Make;MicroGest5:Make;MicroGest6:Make;MicroGest7:Make;MicroGest7_FMX:Make;MicroGest8:Make;MicroGestBasePkg:Make;MicroGestSQLitePkg:Make;MicroGestFirebirdPkg:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
