@@ -57,7 +57,7 @@ var
 implementation
 
 uses
-  Model.Factory, Vcl.Dialogs, UI.Factory;
+  Model.Factory, Vcl.Dialogs, System.UITypes, UI.Factory;
 
 {$R *.dfm}
 
@@ -114,7 +114,6 @@ procedure TMainForm.PopolaMenuNuovo;
 var
   LTipiDocs: TStrings;
   LTipoDoc: String;
-  LNewMenuItem: TMenuItem;
   function NewMenuItem: TMenuItem;
   begin
     Result := TMenuItem.Create(Self);

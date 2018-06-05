@@ -3,7 +3,7 @@ unit Persistence.FireDAC.SQLite;
 interface
 
 uses
-  Persistence.Interfaces, FireDAC.Comp.Client, Data.DB,
+  Persistence.Interfaces, FireDAC.Comp.Client, FireDAC.Stan.Param, Data.DB,
   FireDAC.Stan.Def,
   FireDAC.Phys.SQLite,
   FireDAC.Stan.ExprFuncs,
@@ -11,7 +11,6 @@ uses
   FireDAC.Phys,
   FireDAC.DApt,
   FireDAC.UI.Intf,
-  FireDAC.ConsoleUI.Wait,
   FireDAC.Comp.UI,
   FireDAC.Stan.Async,
 {$IFDEF mgFMX}
@@ -19,8 +18,8 @@ uses
 {$ELSE}
   FireDAC.VCLUI.Wait;
 {$ENDIF}
-type
 
+type
   TPersistanceFireDacSQLiteFactory = class(TInterfacedObject, IPersistanceLayerFactory)
   private
     class var FInstance: IPersistanceLayerFactory;

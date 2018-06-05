@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UI.Documento, Data.DB, System.Actions, Vcl.ActnList, Vcl.StdCtrls, Vcl.Mask, Vcl.DBCtrls,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, System.UITypes, UI.Documento, Data.DB, System.Actions, Vcl.ActnList, Vcl.StdCtrls, Vcl.Mask, Vcl.DBCtrls,
   Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls, Vcl.Buttons;
 
 type

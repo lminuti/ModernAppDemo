@@ -16,7 +16,6 @@ inherited UIDocumento: TUIDocumento
       Size.Height = 40.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'trashtoolbutton'
-      Visible = True
     end
     object SpeedButton3: TSpeedButton
       Action = acNuovaRiga
@@ -28,7 +27,6 @@ inherited UIDocumento: TUIDocumento
       Size.Height = 40.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'additembutton'
-      Visible = True
     end
   end
   object ListBox1: TListBox [1]
@@ -42,8 +40,8 @@ inherited UIDocumento: TUIDocumento
     DefaultItemStyles.ItemStyle = ''
     DefaultItemStyles.GroupHeaderStyle = ''
     DefaultItemStyles.GroupFooterStyle = ''
-    Viewport.Width = 348.000000000000000000
-    Viewport.Height = 62.000000000000000000
+    Viewport.Width = 352.000000000000000000
+    Viewport.Height = 66.000000000000000000
     object ListBoxItem1: TListBoxItem
       Size.Width = 348.000000000000000000
       Size.Height = 30.000000000000000000
@@ -99,8 +97,8 @@ inherited UIDocumento: TUIDocumento
     DefaultItemStyles.ItemStyle = ''
     DefaultItemStyles.GroupHeaderStyle = ''
     DefaultItemStyles.GroupFooterStyle = ''
-    Viewport.Width = 348.000000000000000000
-    Viewport.Height = 132.000000000000000000
+    Viewport.Width = 352.000000000000000000
+    Viewport.Height = 136.000000000000000000
     object ListBoxItem6: TListBoxItem
       Size.Width = 348.000000000000000000
       Size.Height = 30.000000000000000000

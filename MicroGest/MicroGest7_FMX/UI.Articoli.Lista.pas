@@ -27,7 +27,7 @@ type
     FModelListaArticoli: IModelListaArticoli;
   public
     { Public declarations }
-    constructor Create(AOwner: TComponent; AModelListaArticoli: IModelListaArticoli); overload;
+    constructor Create(AOwner: TComponent; AModelListaArticoli: IModelListaArticoli); reintroduce; overload;
   end;
 
 implementation

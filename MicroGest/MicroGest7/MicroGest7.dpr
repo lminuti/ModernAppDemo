@@ -20,7 +20,6 @@ uses
   UI.Documento.Fattura in 'UI.Documento.Fattura.pas' {FatturaForm},
   UI.Documento.Preventivo in 'UI.Documento.Preventivo.pas' {PreventivoForm},
   Model.Documento.Preventivo in 'Model.Documento.Preventivo.pas',
-  Persistence.FireDAC.SQLite in 'Persistence.FireDAC.SQLite.pas',
   UI.Factory in 'UI.Factory.pas';
 
 {$R *.res}

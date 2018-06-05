@@ -3,20 +3,25 @@ unit Persistence.FireDAC.SQLite;
 interface
 
 uses
-  Persistence.Interfaces, FireDAC.Comp.Client, Data.DB,
+  Persistence.Interfaces, FireDAC.Comp.Client, FireDAC.Stan.Param, Data.DB,
   FireDAC.Stan.Def,
-  FireDAC.Stan.Param,
   FireDAC.Phys.SQLite,
   FireDAC.Stan.ExprFuncs,
   FireDAC.Stan.Intf,
   FireDAC.Phys,
   FireDAC.DApt,
   FireDAC.UI.Intf,
-  FireDAC.ConsoleUI.Wait,
   FireDAC.Comp.UI,
   FireDAC.Stan.Async,
-  FireDAC.VCLUI.Wait, Demo.Core.Rtti, Demo.Core.ServiceLocator{,
-  FireDAC.FMXUI.Wait};
+
+  Demo.Core.Rtti,
+  Demo.Core.ServiceLocator,
+
+{$IFDEF mgFMX}
+  FireDAC.FMXUI.Wait;
+{$ELSE}
+  FireDAC.VCLUI.Wait;
+{$ENDIF}
 
 type
   [Alias('sqlite')]

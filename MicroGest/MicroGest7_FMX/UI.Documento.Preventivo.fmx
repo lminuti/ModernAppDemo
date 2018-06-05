@@ -5,8 +5,8 @@ inherited UIPreventivo: TUIPreventivo
     end
   end
   inherited ListBox1: TListBox
-    Viewport.Width = 348.000000000000000000
-    Viewport.Height = 62.000000000000000000
+    Viewport.Width = 352.000000000000000000
+    Viewport.Height = 66.000000000000000000
     inherited ListBoxItem1: TListBoxItem
       inherited EditCliente: TEdit
         TextSettings.Font.StyleExt = {00070000000000000004000000}
@@ -21,8 +21,8 @@ inherited UIPreventivo: TUIPreventivo
   inherited ListBox2: TListBox
     Position.Y = 362.000000000000000000
     Size.Height = 168.000000000000000000
-    Viewport.Width = 348.000000000000000000
-    Viewport.Height = 164.000000000000000000
+    Viewport.Width = 352.000000000000000000
+    Viewport.Height = 168.000000000000000000
     inherited ListBoxItem3: TListBoxItem
       TextSettings.Font.StyleExt = {00070000000000000004000000}
       inherited EditTotaleImponibile: TEdit

@@ -16,10 +16,10 @@ uses
   UI.Interfaces in 'UI.Interfaces.pas',
   Model.Articoli.Lista in 'Model.Articoli.Lista.pas',
   UI.Articoli.Lista in 'UI.Articoli.Lista.pas' {ListaArticoliForm},
-  Persistence.dbx.Firebird in 'Persistence.dbx.Firebird.pas' {PersistanceDbxFirebirdFactory: TDataModule},
   Model.Documento.CalcolaIC in 'Model.Documento.CalcolaIC.pas',
   UI.Documento.Preventivo in 'UI.Documento.Preventivo.pas' {PreventivoForm},
-  UI.Documento.Fattura in 'UI.Documento.Fattura.pas' {FatturaForm};
+  UI.Documento.Fattura in 'UI.Documento.Fattura.pas' {FatturaForm},
+  Persistence.FireDAC.SQLite in 'Persistence.FireDAC.SQLite.pas';
 
 {$R *.res}
 
