@@ -83,10 +83,15 @@ end;
 
 procedure TConsole.Pause;
 begin
-  {$IFDEF DEBUG}
-  Writeln('Press any key....');
-  Readln;
+  {$WARN SYMBOL_PLATFORM OFF}
+  {$IFDEF MSWINDOWS}
+  if DebugHook > 0 then
+  begin
+    Writeln('Press any key....');
+    Readln;
+  end;
   {$ENDIF}
+  {$WARN SYMBOL_PLATFORM ON}
 end;
 
 procedure TConsole.Run;
