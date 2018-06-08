@@ -26,6 +26,7 @@ Semplice esempio di applicazione GUI che mostra come evitare di introdurre dipen
 ## MicroGest
 
 Una serie di esempi che mostra come un'architettura divisa a strati (in questo caso: ui, persistenza e modello) permette di aggiungere funzionalità al programma senza modificare il codice esistente.
+**NB**: Il primo demo crea anche il database.
 
 ## Licenza
 

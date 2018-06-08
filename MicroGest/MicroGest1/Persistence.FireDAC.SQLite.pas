@@ -3,7 +3,14 @@ unit Persistence.FireDAC.SQLite;
 interface
 
 uses
+  System.Classes,
+  {$IFDEF MSWINDOWS}
+  Winapi.Windows, Winapi.Messages,
+  {$ENDIF}
   Persistence.Interfaces, FireDAC.Comp.Client, FireDAC.Stan.Param, Data.DB,
+  FireDAC.Comp.ScriptCommands,
+  FireDAC.Comp.DataSet,
+  FireDAC.Comp.Script,
   FireDAC.Stan.Def,
   FireDAC.Phys.SQLite,
   FireDAC.Stan.ExprFuncs,
@@ -24,6 +31,7 @@ type
   private
     class var FInstance: IPersistanceLayerFactory;
     FConnection: TFDConnection;
+    procedure InitDatabase;
   protected
     function GetQuery: TFDQuery;
     function GetNextDocID: Integer; virtual;
@@ -84,11 +92,20 @@ begin
 end;
 
 constructor TPersistanceFireDacSQLiteFactory.Create;
+var
+  DatabasePath: string;
+  AutoCreateDatabase: Boolean;
 begin
+  DatabasePath := TPath.Combine(TPath.GetDocumentsPath, 'microgest.db');
+  AutoCreateDatabase := not FileExists(DatabasePath);
+
   FConnection := TFDConnection.Create(nil);
   FConnection.Params.DriverID := 'SQLite';
-  FConnection.Params.Database := TPath.Combine(TPath.GetDocumentsPath, 'microgest.db');
+  FConnection.Params.Database := DatabasePath;
   FConnection.Open;
+
+  if AutoCreateDatabase then
+    InitDatabase;
 end;
 
 destructor TPersistanceFireDacSQLiteFactory.Destroy;
@@ -196,5 +213,35 @@ procedure TPersistanceFireDacSQLiteFactory.StartTransaction;
 begin
   FConnection.StartTransaction;
 end;
+
+procedure TPersistanceFireDacSQLiteFactory.InitDatabase;
+{$IFDEF MSWINDOWS}
+const
+  SQLLiteCreateDB = 'MICROGEST_SQLLITE_DATA'; // resource name
+var
+  FDScript: TFDScript;
+  FDSQLScript: TFDSQLScript;
+  SQLScriptStream: TStream;
+begin
+  FDScript := TFDScript.Create(nil);
+  try
+    FDScript.Connection := FConnection;
+    FDSQLScript := FDScript.SQLScripts.Add;
+    SQLScriptStream := TResourceStream.Create(HInstance, SQLLiteCreateDB, RT_RCDATA);
+    try
+      SQLScriptStream.Position := 0;
+      FDSQLScript.SQL.LoadFromStream(SQLScriptStream);
+    finally
+      SQLScriptStream.Free;
+    end;
+    FDScript.ExecuteAll;
+  finally
+    FDScript.Free;
+  end;
+end;
+{$ELSE}
+begin
+end;
+{$ENDIF}
 
 end.
