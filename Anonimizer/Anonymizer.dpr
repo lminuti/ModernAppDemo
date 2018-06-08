@@ -3,9 +3,6 @@ program Anonymizer;
 {$APPTYPE CONSOLE}
 
 {$R *.res}
-
-
-
 {$R 'Anon.Resource.res' 'Anon.Resource.rc'}
 
 uses
@@ -26,8 +23,12 @@ uses
   Anon.Interfaces in 'Anon.Interfaces.pas';
 
 begin
-  // Sarebbe meglio gestire le eccezioni...
   ReportMemoryLeaksOnShutdown := True;
-  with ServiceLocator.GetClass<IUserInterface> do
-    Run;
+  try
+    with ServiceLocator.GetClass<IUserInterface> do
+      Run;
+  except
+     on E: Exception do
+       ShowException(E, ExceptAddr);
+  end;
 end.

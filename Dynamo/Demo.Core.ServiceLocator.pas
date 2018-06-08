@@ -63,7 +63,8 @@ end;
 
 function TServiceLocator.GetClass<T>: T;
 begin
-  Result := GetClass<T>('');
+  if not TryGetClass<T>(Result) then
+    raise ERegistryError.CreateFmt('Classe [%s] non trovata', [TRttiUtils.Context.GetType(TypeInfo(T)).Name]);
 end;
 
 function TServiceLocator.GetAlias(AClassType: TClass): string;

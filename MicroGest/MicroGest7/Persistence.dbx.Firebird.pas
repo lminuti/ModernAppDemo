@@ -12,6 +12,8 @@ type
     procedure DataModuleCreate(Sender: TObject);
   private
     class var FInstance: IPersistanceLayerFactory;
+    class destructor Destroy;
+  private
     FTransaction: TDBXTransaction;
     procedure onRigheAfterInsertEventHandler(DataSet: TDataSet);
   protected
@@ -77,7 +79,12 @@ end;
 procedure TPersistanceDbxFirebirdFactory.DataModuleCreate(Sender: TObject);
 begin
 //  Connection.Params.Values['Database'] := TPath.Combine(TPath.GetDocumentsPath, 'MicroGest.fdb');
-  Connection.Params.Values['Database'] := TPath.Combine(TPath.GetPublicPath, 'MicroGest.fdb');
+  Connection.Params.Values['Database'] := 'MicroGest.fdb';
+end;
+
+class destructor TPersistanceDbxFirebirdFactory.Destroy;
+begin
+  (FInstance as TObject).Free;
 end;
 
 function TPersistanceDbxFirebirdFactory.GetDocumentoDS(const ATipoDoc: String; const AID: Integer): TDataSet;
