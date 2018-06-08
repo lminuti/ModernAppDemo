@@ -1,3 +1,14 @@
+* Un package non è nient'altro che un particolare tipo di libreria (dll)
+* Sono usati dall'IDE ma anche dalla applicazioni
+* Possono essere caricati staticamente o dinamicamente
+* Possimo contenere più unit (ma non hanno un entry point)
+* Possono far riferimento ad altri package tramite la keyword require
+* Attenzione: non possono contenere riferimenti circolari
+* Attenzione: una unit non può far parte di due package (usati conteporaneamente)
+
+
+-------------------------------------------------------------
+
 * Tolgo le dipendeza da SQLite e FB da TPersistanceFactory
 * Aggiungo il ServiceLocator
 * Aggiungo gli alias e registro TPersistanceDbxFirebirdFactory e TPersistanceFireDacSQLiteFactory
