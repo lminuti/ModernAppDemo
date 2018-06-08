@@ -27,3 +27,6 @@ Semplice esempio di applicazione GUI che mostra come evitare di introdurre dipen
 
 Una serie di esempi che mostra come un'architettura divisa a strati (in questo caso: ui, persistenza e modello) permette di aggiungere funzionalità al programma senza modificare il codice esistente.
 
+## Licenza
+
+Il software è rilasciato nei termini della MIT license. In breve: fatene quello che volete ma se qualcosa non funziona non è colpa nostra :-)
