@@ -1,6 +1,7 @@
 ﻿# Slides
 
 La cartella "Slides" contiene i files della presentazione nei 3 formati (Keynote per Mac, PowerPoint e PDF)
+
 **NB**: Le slides sono state create con Keynote su Mac, gli altri due formati sono frutto di esportazione per cui potrebbero non essere perfette, soprattutto la versione PowerPoint potrebbe apparire leggermente disallineata, con font, animazioni, transizioni, sostituiti.
 
 
