@@ -2,6 +2,14 @@
 *.identcache
 *.tvsconfig
 *.dcu
+*.o
+*.exe
+*.skincfg
+*.stat
+*.vlb
+*.so
+*.dex
+*.otares
 /__history
 __history
 Win32
