@@ -1,0 +1,84 @@
+inherited UIFattura: TUIFattura
+  inherited ToolBarTop: TToolBar
+    inherited Title: TLabel
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+    end
+  end
+  inherited ListBox1: TListBox
+    Viewport.Width = 352.000000000000000000
+    Viewport.Height = 66.000000000000000000
+    inherited ListBoxItem1: TListBoxItem
+      inherited EditCliente: TEdit
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+      end
+    end
+    inherited ListBoxItem2: TListBoxItem
+      inherited EditData: TDateEdit
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+      end
+    end
+  end
+  inherited ListBox2: TListBox
+    Position.Y = 362.000000000000000000
+    Size.Height = 168.000000000000000000
+    Viewport.Width = 352.000000000000000000
+    Viewport.Height = 168.000000000000000000
+    inherited ListBoxItem3: TListBoxItem
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      inherited EditTotaleImponibile: TEdit
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+      end
+    end
+    inherited ListBoxItem4: TListBoxItem
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      inherited EditTotaleIVA: TEdit
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+      end
+    end
+    inherited ListBoxItem5: TListBoxItem
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      inherited EditTotaleDocumento: TEdit
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+      end
+    end
+    object ListBoxItem8: TListBoxItem
+      Position.Y = 131.000000000000000000
+      Size.Width = 348.000000000000000000
+      Size.Height = 30.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 5
+      Text = 'Pagamento'
+      object EditPagamento: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Client
+        TabOrder = 0
+        Margins.Left = 150.000000000000000000
+        Margins.Top = 2.000000000000000000
+        Margins.Right = 2.000000000000000000
+        Margins.Bottom = 2.000000000000000000
+        Size.Width = 196.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        StyledSettings = [Family, Size, FontColor]
+      end
+    end
+  end
+  inherited ListViewRighe: TListView
+    Size.Height = 256.000000000000000000
+  end
+  inherited DocMemTable: TFDMemTable
+    object DocMemTablePAGAMENTO: TStringField
+      FieldName = 'PAGAMENTO'
+      Size = 30
+    end
+  end
+  inherited BindingsList1: TBindingsList
+    object LinkControlToField9: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = DocBindSourceDB
+      FieldName = 'PAGAMENTO'
+      Control = EditPagamento
+      Track = False
+    end
+  end
+end

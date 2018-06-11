@@ -1,5 +1,7 @@
 program MicroGest1;
 
+{$R 'MicroGest.Resources.res' '..\MicroGest.Resources.rc'}
+
 uses
   Vcl.Forms,
   UI.Main in 'UI.Main.pas' {MainForm},

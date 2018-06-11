@@ -8,7 +8,7 @@ object StartForm: TStartForm
   FormFactor.Height = 900
   FormFactor.Devices = [Desktop]
   OnCreate = FormCreate
-  DesignerMasterStyle = 0
+  DesignerMasterStyle = 3
   object MainTabControl: TTabControl
     Align = Client
     FullSize = True
@@ -33,9 +33,11 @@ object StartForm: TStartForm
       StyleLookup = ''
       TabOrder = 0
       Text = 'TabItemMain'
+      ExplicitSize.cx = 8.000000000000000000
+      ExplicitSize.cy = 8.000000000000000000
       object ToolBarTop: TToolBar
         Size.Width = 384.000000000000000000
-        Size.Height = 40.000000000000000000
+        Size.Height = 48.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         object SpeedButton1: TSpeedButton
@@ -43,8 +45,8 @@ object StartForm: TStartForm
           Align = Left
           Enabled = True
           ImageIndex = -1
-          Size.Width = 40.000000000000000000
-          Size.Height = 40.000000000000000000
+          Size.Width = 48.000000000000000000
+          Size.Height = 48.000000000000000000
           Size.PlatformDefault = False
           StyleLookup = 'stoptoolbutton'
           Visible = True
@@ -57,7 +59,7 @@ object StartForm: TStartForm
         FooterAppearanceClassName = 'TListHeaderObjects'
         Align = Client
         Size.Width = 384.000000000000000000
-        Size.Height = 527.000000000000000000
+        Size.Height = 519.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 1
         OnItemClick = ListView1ItemClick

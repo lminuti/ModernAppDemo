@@ -1,0 +1,425 @@
+inherited UIDocumento: TUIDocumento
+  inherited ToolBarTop: TToolBar
+    inherited Title: TLabel
+      Align = None
+      Position.X = 80.000000000000000000
+      Size.Width = 185.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+    end
+    object SpeedButton2: TSpeedButton
+      Action = acEliminaRiga
+      Align = Right
+      Enabled = True
+      ImageIndex = -1
+      Position.X = 272.000000000000000000
+      Size.Width = 40.000000000000000000
+      Size.Height = 40.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'trashtoolbutton'
+    end
+    object SpeedButton3: TSpeedButton
+      Action = acNuovaRiga
+      Align = Right
+      Enabled = True
+      ImageIndex = -1
+      Position.X = 312.000000000000000000
+      Size.Width = 40.000000000000000000
+      Size.Height = 40.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'additembutton'
+    end
+  end
+  object ListBox1: TListBox [1]
+    Align = Top
+    Position.Y = 40.000000000000000000
+    Size.Width = 352.000000000000000000
+    Size.Height = 66.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    DisableFocusEffect = True
+    DefaultItemStyles.ItemStyle = ''
+    DefaultItemStyles.GroupHeaderStyle = ''
+    DefaultItemStyles.GroupFooterStyle = ''
+    Viewport.Width = 352.000000000000000000
+    Viewport.Height = 66.000000000000000000
+    object ListBoxItem1: TListBoxItem
+      Size.Width = 348.000000000000000000
+      Size.Height = 30.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Text = 'Cliente'
+      object EditCliente: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Client
+        TabOrder = 0
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        Margins.Left = 60.000000000000000000
+        Margins.Top = 2.000000000000000000
+        Margins.Right = 2.000000000000000000
+        Margins.Bottom = 2.000000000000000000
+        Size.Width = 286.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        StyledSettings = [Family, Size, FontColor]
+      end
+    end
+    object ListBoxItem2: TListBoxItem
+      Position.Y = 30.000000000000000000
+      Size.Width = 348.000000000000000000
+      Size.Height = 30.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Text = 'Data'
+      object EditData: TDateEdit
+        Date = 43252.000000000000000000
+        Align = Client
+        Margins.Left = 60.000000000000000000
+        Margins.Top = 2.000000000000000000
+        Margins.Right = 2.000000000000000000
+        Margins.Bottom = 2.000000000000000000
+        Size.Width = 286.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        StyledSettings = [Family, Size, FontColor]
+        TabOrder = 0
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+      end
+    end
+  end
+  object ListBox2: TListBox [2]
+    Align = Bottom
+    Position.Y = 394.000000000000000000
+    Size.Width = 352.000000000000000000
+    Size.Height = 136.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 6
+    DisableFocusEffect = True
+    DefaultItemStyles.ItemStyle = ''
+    DefaultItemStyles.GroupHeaderStyle = ''
+    DefaultItemStyles.GroupFooterStyle = ''
+    Viewport.Width = 352.000000000000000000
+    Viewport.Height = 136.000000000000000000
+    object ListBoxItem6: TListBoxItem
+      Size.Width = 348.000000000000000000
+      Size.Height = 30.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      Text = 'Riga (Qt'#224', Prezzo, Sconto)'
+      object EditQta: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Left
+        TabOrder = 2
+        TextSettings.HorzAlign = Center
+        Position.X = 150.000000000000000000
+        Position.Y = 2.000000000000000000
+        Margins.Left = 150.000000000000000000
+        Margins.Top = 2.000000000000000000
+        Margins.Right = 2.000000000000000000
+        Margins.Bottom = 2.000000000000000000
+        Size.Width = 50.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        StyledSettings = [Family, Size, FontColor]
+      end
+      object EditPrezzo: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Left
+        TabOrder = 1
+        TextSettings.HorzAlign = Trailing
+        Position.X = 204.000000000000000000
+        Position.Y = 2.000000000000000000
+        Margins.Left = 2.000000000000000000
+        Margins.Top = 2.000000000000000000
+        Margins.Right = 2.000000000000000000
+        Margins.Bottom = 2.000000000000000000
+        Size.Width = 80.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        StyledSettings = [Family, Size, FontColor]
+      end
+      object EditSconto: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Left
+        TabOrder = 0
+        TextSettings.HorzAlign = Center
+        Position.X = 288.000000000000000000
+        Position.Y = 2.000000000000000000
+        Margins.Left = 2.000000000000000000
+        Margins.Top = 2.000000000000000000
+        Margins.Right = 2.000000000000000000
+        Margins.Bottom = 2.000000000000000000
+        Size.Width = 50.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        StyledSettings = [Family, Size, FontColor]
+      end
+    end
+    object ListBoxItem7: TListBoxItem
+      Position.Y = 30.000000000000000000
+      Size.Width = 348.000000000000000000
+      Size.Height = 11.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 4
+    end
+    object ListBoxItem3: TListBoxItem
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      StyledSettings = [Family, Size, FontColor, Other]
+      Position.Y = 41.000000000000000000
+      Size.Width = 348.000000000000000000
+      Size.Height = 30.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Text = 'Totale imponibile'
+      object EditTotaleImponibile: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Client
+        TabOrder = 0
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.HorzAlign = Trailing
+        Margins.Left = 150.000000000000000000
+        Margins.Top = 2.000000000000000000
+        Margins.Right = 2.000000000000000000
+        Margins.Bottom = 2.000000000000000000
+        Size.Width = 196.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        StyledSettings = [Family, Size, FontColor]
+      end
+    end
+    object ListBoxItem4: TListBoxItem
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      StyledSettings = [Family, Size, FontColor, Other]
+      Position.Y = 71.000000000000000000
+      Size.Width = 348.000000000000000000
+      Size.Height = 30.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Text = 'Totale IVA'
+      object EditTotaleIVA: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Client
+        TabOrder = 0
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.HorzAlign = Trailing
+        Margins.Left = 150.000000000000000000
+        Margins.Top = 2.000000000000000000
+        Margins.Right = 2.000000000000000000
+        Margins.Bottom = 2.000000000000000000
+        Size.Width = 196.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        StyledSettings = [Family, Size, FontColor]
+      end
+    end
+    object ListBoxItem5: TListBoxItem
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      StyledSettings = [Family, Size, FontColor, Other]
+      Position.Y = 101.000000000000000000
+      Size.Width = 348.000000000000000000
+      Size.Height = 30.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      Text = 'Totale documento'
+      object EditTotaleDocumento: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Client
+        TabOrder = 0
+        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.HorzAlign = Trailing
+        Margins.Left = 150.000000000000000000
+        Margins.Top = 2.000000000000000000
+        Margins.Right = 2.000000000000000000
+        Margins.Bottom = 2.000000000000000000
+        Size.Width = 196.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        StyledSettings = [Family, Size, FontColor]
+      end
+    end
+  end
+  object ListViewRighe: TListView [3]
+    ItemAppearanceClassName = 'TListItemRightDetailAppearance'
+    ItemEditAppearanceClassName = 'TListItemRightDetailDeleteAppearance'
+    HeaderAppearanceClassName = 'TListHeaderObjects'
+    FooterAppearanceClassName = 'TListHeaderObjects'
+    Align = Client
+    Size.Width = 352.000000000000000000
+    Size.Height = 288.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 9
+  end
+  inherited ActionList1: TActionList
+    Left = 272
+    Top = 208
+    object acNuovaRiga: TAction
+      Text = 'acNuovaRiga'
+      OnExecute = acNuovaRigaExecute
+    end
+    object acEliminaRiga: TAction
+      Text = 'acEliminaRiga'
+      OnExecute = acEliminaRigaExecute
+    end
+  end
+  object DocBindSourceDB: TBindSourceDB
+    DataSet = DocMemTable
+    ScopeMappings = <>
+    Left = 152
+    Top = 144
+  end
+  object DocMemTable: TFDMemTable
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Left = 48
+    Top = 144
+    object DocMemTableTIPO: TStringField
+      DisplayWidth = 20
+      FieldName = 'TIPO'
+    end
+    object DocMemTableDATA: TDateField
+      FieldName = 'DATA'
+    end
+    object DocMemTableCLIENTE: TStringField
+      FieldName = 'CLIENTE'
+      Size = 30
+    end
+    object DocMemTableTOTALEIMPONIBILE: TCurrencyField
+      FieldName = 'TOTALEIMPONIBILE'
+    end
+    object DocMemTableTOTALEIVA: TCurrencyField
+      FieldName = 'TOTALEIVA'
+    end
+    object DocMemTableTOTALEDOCUMENTO: TCurrencyField
+      FieldName = 'TOTALEDOCUMENTO'
+    end
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 268
+    Top = 141
+    object LinkPropertyToFieldText: TLinkPropertyToField
+      Category = 'Quick Bindings'
+      DataSource = DocBindSourceDB
+      FieldName = 'TIPO'
+      Component = Title
+      ComponentProperty = 'Text'
+    end
+    object LinkControlToField1: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = DocBindSourceDB
+      FieldName = 'DATA'
+      Control = EditData
+      Track = False
+    end
+    object LinkControlToField2: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = DocBindSourceDB
+      FieldName = 'CLIENTE'
+      Control = EditCliente
+      Track = False
+    end
+    object LinkControlToField3: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = DocBindSourceDB
+      FieldName = 'TOTALEIMPONIBILE'
+      Control = EditTotaleImponibile
+      Track = False
+    end
+    object LinkControlToField4: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = DocBindSourceDB
+      FieldName = 'TOTALEIVA'
+      Control = EditTotaleIVA
+      Track = False
+    end
+    object LinkControlToField5: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = DocBindSourceDB
+      FieldName = 'TOTALEDOCUMENTO'
+      Control = EditTotaleDocumento
+      Track = False
+    end
+    object LinkListControlToField1: TLinkListControlToField
+      Category = 'Quick Bindings'
+      DataSource = RigheBindSourceDB
+      FieldName = 'DESCRIZIONE'
+      Control = ListViewRighe
+      FillExpressions = <
+        item
+          SourceMemberName = 'QTA'
+          ControlMemberName = 'Detail'
+        end>
+      FillHeaderExpressions = <>
+      FillBreakGroups = <>
+    end
+    object LinkControlToField6: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = RigheBindSourceDB
+      FieldName = 'PREZZO'
+      Control = EditPrezzo
+      Track = False
+    end
+    object LinkControlToField7: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = RigheBindSourceDB
+      FieldName = 'QTA'
+      Control = EditQta
+      Track = False
+    end
+    object LinkControlToField8: TLinkControlToField
+      Category = 'Quick Bindings'
+      DataSource = RigheBindSourceDB
+      FieldName = 'SCONTO'
+      Control = EditSconto
+      Track = False
+    end
+  end
+  object RigheBindSourceDB: TBindSourceDB
+    DataSet = RigheMemTable
+    ScopeMappings = <>
+    Left = 152
+    Top = 208
+  end
+  object RigheMemTable: TFDMemTable
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Left = 48
+    Top = 208
+    object RigheMemTableID: TIntegerField
+      FieldName = 'ID'
+    end
+    object RigheMemTableID_DOC: TIntegerField
+      FieldName = 'ID_DOC'
+    end
+    object RigheMemTableCODICE: TStringField
+      FieldName = 'CODICE'
+      Size = 10
+    end
+    object RigheMemTableDESCRIZIONE: TStringField
+      FieldName = 'DESCRIZIONE'
+      Size = 40
+    end
+    object RigheMemTableQTA: TFloatField
+      FieldName = 'QTA'
+    end
+    object RigheMemTablePREZZO: TCurrencyField
+      FieldName = 'PREZZO'
+    end
+    object RigheMemTableSCONTO: TFloatField
+      FieldName = 'SCONTO'
+    end
+    object RigheMemTableIMPORTO: TCurrencyField
+      FieldName = 'IMPORTO'
+    end
+  end
+end

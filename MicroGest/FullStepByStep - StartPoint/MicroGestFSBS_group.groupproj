@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{46465685-6EF8-42A9-81B2-7A3AC30FCAF2}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="MicroGest\MicroGestSBS.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="MicroGest7_FMX\MicroGest7_FMX.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="MicroGestSBS">
+        <MSBuild Projects="MicroGest\MicroGestSBS.dproj"/>
+    </Target>
+    <Target Name="MicroGestSBS:Clean">
+        <MSBuild Projects="MicroGest\MicroGestSBS.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="MicroGestSBS:Make">
+        <MSBuild Projects="MicroGest\MicroGestSBS.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="MicroGest7_FMX">
+        <MSBuild Projects="MicroGest7_FMX\MicroGest7_FMX.dproj"/>
+    </Target>
+    <Target Name="MicroGest7_FMX:Clean">
+        <MSBuild Projects="MicroGest7_FMX\MicroGest7_FMX.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="MicroGest7_FMX:Make">
+        <MSBuild Projects="MicroGest7_FMX\MicroGest7_FMX.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="MicroGestSBS;MicroGest7_FMX"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="MicroGestSBS:Clean;MicroGest7_FMX:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="MicroGestSBS:Make;MicroGest7_FMX:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

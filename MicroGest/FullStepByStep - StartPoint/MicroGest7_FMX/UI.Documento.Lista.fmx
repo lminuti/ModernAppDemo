@@ -1,0 +1,7 @@
+inherited UIDocumentoLista: TUIDocumentoLista
+  inherited ToolBarTop: TToolBar
+    inherited Title: TLabel
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+    end
+  end
+end

@@ -1,0 +1,41 @@
+object UIBase: TUIBase
+  Size.Width = 352.000000000000000000
+  Size.Height = 530.000000000000000000
+  Size.PlatformDefault = False
+  object ToolBarTop: TToolBar
+    Size.Width = 352.000000000000000000
+    Size.Height = 40.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object SpeedButton1: TSpeedButton
+      Action = acBack
+      Align = Left
+      Enabled = True
+      ImageIndex = -1
+      Size.Width = 40.000000000000000000
+      Size.Height = 40.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'priortoolbutton'
+      Visible = True
+    end
+    object Title: TLabel
+      Align = Contents
+      StyledSettings = [Family, FontColor]
+      Size.Width = 352.000000000000000000
+      Size.Height = 40.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 14.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      TextSettings.HorzAlign = Center
+      Text = 'Title'
+    end
+  end
+  object ActionList1: TActionList
+    Left = 128
+    Top = 64
+    object acBack: TAction
+      Text = 'acBack'
+      OnExecute = acBackExecute
+    end
+  end
+end
