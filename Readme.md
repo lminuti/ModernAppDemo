@@ -40,6 +40,8 @@ Una serie di esempi (divisi in step di evoluzione) che mostra come un'architettu
  
 **NB**: Il primo demo (MicroGest1) crea anche il database, gli altri step mostrano l'evolversi passo/passo della stessa applicazione.
 
+**NB**: La cartella "Database" contiene una copia dei due database, un DB SQLite (che cmq viene creato anche automaticamente dallo step 1) che deve trovarsi nella cartella "Documenti", l'altro un DB Firebird che deve trovarsi nella cartella "c:\ProgramData".
+
 **NB**: La cartella "StepByStep" contiene due cartelle delle quali una (MicroGest) è il punto di partenza corrispondente allo step 1 per dimostrare, dal vivo, l'evoluzione del progetto attraverso gli step successivi aggiungendo man mano le unit corrispondenti (le unit sono già presenti nella cartella, basta aggiungerle al progetto e adattare le factories).
 
 **NB**: La cartella "FullStepByStep" è come la "StepByStep" ma senza le unit mancanti nella cartella, in pratica le unit mancanti vanno create da zero manualmente. 
