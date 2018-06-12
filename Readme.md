@@ -1,6 +1,9 @@
 ﻿# Slides
 
-La cartella "Slides" contiene i files della presentazione nei 3 formati (Keynote per Mac, PowerPoint e PDF)
+Potete trovare le slide nei vari formati ai seguenti link:
+* [DelphiDay 2018 Piacenza.pdf](https://raw.githubusercontent.com/wiki/lminuti/ModernAppDemo/slides/DelphiDay%202018%20Piacenza.pdf)
+* [DelphiDay 2018 Piacenza.key](https://raw.githubusercontent.com/wiki/lminuti/ModernAppDemo/slides/DelphiDay%202018%20Piacenza.key)
+* [DelphiDay 2018 Piacenza.pptx](https://raw.githubusercontent.com/wiki/lminuti/ModernAppDemo/slides/DelphiDay%202018%20Piacenza.pptx)
 
 **NB**: Le slides sono state create con Keynote su Mac, gli altri due formati sono frutto di esportazione per cui potrebbero non essere perfette, soprattutto la versione PowerPoint potrebbe apparire leggermente disallineata, con font, animazioni, transizioni, sostituiti.
 
