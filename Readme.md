@@ -15,7 +15,7 @@ Demo per il seminario "*Architetture modulari e moderne con Delphi*".
 
 
 ## Anonymizer
-Applicazione a linea di comando che permette di anonimazzare una base dati. La sintassi è la seguente:
+Applicazione a linea di comando che permette di anonimizzare una base dati. La sintassi è la seguente:
 
 ```
 ANONYMIZER [/H] [/V] [/A ][/P password] [/F nomefile]
@@ -33,7 +33,7 @@ Il file di configurazione deve essere strutturato sul modello dei due di esempio
 
 ## BasicGuiDemo
 
-Semplice esempio di applicazione GUI che mostra come evitare di introdurre dipendeze tra form pur matenendo possibile una comunicazione bidirezionale tra le stesse.
+Semplice esempio di applicazione GUI che mostra come evitare di introdurre dipendenze tra form pur mantenendo possibile una comunicazione bidirezionale tra le stesse.
 
 
 ## MicroGest
@@ -50,7 +50,7 @@ Una serie di esempi (divisi in step di evoluzione) che mostra come un'architettu
 
 **NB**: La cartella "FullStepByStep" è come la "StepByStep" ma senza le unit mancanti nella cartella, in pratica le unit mancanti vanno create da zero manualmente. 
 
-**NB**: Il file "MicroGest.PDF" contiene una descrizione dei singoli step di evoluzione dell'appplicazione.
+**NB**: Il file "MicroGest.PDF" contiene una descrizione dei singoli step di evoluzione dell'applicazione.
 
 
 ## Licenza
